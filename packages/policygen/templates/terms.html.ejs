@@ -1,0 +1,285 @@
+<div id="policygen-tos" class="<%= css.container %>">
+  <h1 class="<%= css.heading %>"><%= t('tos.title') %></h1>
+  <h3 class="<%= css.subheading %>"><%= t('tos.last_updated', { updated: updated }) %></h3>
+
+  <!-- Introduction -->
+  <section class="<%= css.section %>">
+    <p class="<%= css.paragraph %>">
+      <%- t('tos.terms_notice', { entity_name: config.entity.name, entity_website: config.entity.website, link_class: css.link }) %>
+    </p>
+    <p class="<%= css.paragraph %>">
+      <% t('tos.agreement') %>
+    </p>
+    <p class="<%= css.paragraph %>">
+      <% t('tos.changes') %>
+    </p>
+    <% if (!config.terms.underEighteen && !config.terms.underThirteen) { %>
+      <p class="<%= css.paragraph %>">
+        <%= t('tos.age_limitation') %>
+      </p>
+    <% } else if (!config.terms.underThirteen) { %>
+      <p class="<%= css.paragraph %>">
+        <%= t('tos.thirteen_limitation') %>
+      </p>
+    <% } else { %>
+      <p class="<%= css.paragraph %>">
+        <%= t('tos.no_age_limitation') %>
+      </p>
+    <% } %>
+  </section>
+
+  <!-- Policy Sections -->
+  <section class="<%= css.section %>">
+    <h2 class="<%= css.subheading %>"><%= t('tos.sections.title') %></h1>
+    <ol class="<%= css.ol_class %>">
+      <% if (config.terms.userAccounts) { %>
+        <li><a href="#section-user-accounts" class="<%= css.link %>"><%= t('tos.sections.user_accounts') %></a></li>
+      <% } %>
+      <% if (config.terms.userContent) { %>
+        <li><a href="#section-user-content" class="<%= css.link %>"><%= t('tos.sections.user_content') %></a></li>
+      <% } %>
+      <% if (config.terms.purchasableGoods) { %>
+        <li><a href="#section-purchasable-goods" class="<%= css.link %>"><%= t('tos.sections.purchasable_goods') %></a></li>
+      <% } %>
+      <% if (config.terms.subscription) { %>
+        <li><a href="#section-subscriptions" class="<%= css.link %>"><%= t('tos.sections.subscriptions') %></a></li>
+      <% } %>
+      <li><a href="#section-prohibited-use" class="<%= css.link %>"><%= t('tos.sections.prohibited_use') %></a></li>
+      <li><a href="#section-termination" class="<%= css.link %>"><%= t('tos.sections.termination') %></a></li>
+      <li><a href="#section-governing-law" class="<%= css.link %>"><%= t('tos.sections.governing_law') %></a></li>
+      <li><a href="#section-disputes" class="<%= css.link %>"><%= t('tos.sections.disputes') %></a></li>
+      <li><a href="#section-availability" class="<%= css.link %>"><%= t('tos.sections.availability') %></a></li>
+      <% if (config.terms.liabilityLimitation) { %>
+        <li><a href="#section-liability-limitation" class="<%= css.link %>"><%= t('tos.sections.liability_limitation') %></a></li>
+      <% } %>
+      <li><a href="#section-indemnfication" class="<%= css.link %>"><%= t('tos.sections.indemnification') %></a></li>
+      <li><a href="#section-contact" class="<%= css.link %>"><%= t('tos.sections.contact') %></a></li>
+    </ol>
+  </section>
+
+  <!-- User Accounts -->
+  <% if (config.terms.userAccounts) { %>
+    <section id="section-user-accounts" class="<%= css.section %>">
+      <h2 class="<%= css.subheading %>"><%= t('tos.sections.user_accounts') %></h2>
+      <p class="<%= css.paragraph %>">
+        <%= t('tos.user_accounts.overview') %>
+      </p>
+      <p class="<%= css.paragraph %>">
+        <%= t('tos.user_accounts.security') %>
+      </p>
+      <p class="<%= css.paragraph %>">
+        <%= t('tos.user_accounts.info') %>
+      </p>
+    </section>
+  <% } %>
+
+  <!-- User Content -->
+  <% if (config.terms.userContent) { %>
+    <section id="section-user-content" class="<%= css.section %>">
+      <h2 class="<%= css.subheading %>"><%= t('tos.sections.user_content') %></h2>
+      <p class="<%= css.paragraph %>">
+        <%= t('tos.user_content.overview') %>
+      </p>
+      <p class="<%= css.paragraph %>">
+        <%= t('tos.user_content.removal') %>
+      </p>
+      <% if (config.terms.userContentLicense) { %>
+        <p class="<%= css.paragraph %>">
+          <%= t('tos.user_content.license') %>
+        </p>
+      <% } %>
+    </section>
+  <% } %>
+
+  <!-- Purchasable Goods -->
+  <% if (config.terms.purchasableGoods) { %>
+    <section id="section-purchasable-goods" class="<%= css.section %>">
+      <h2 class="<%= css.subheading %>"><%= t('tos.sections.purchasable_goods') %></h2>
+      <p class="<%= css.paragraph %>">
+        <%= t('tos.purchasable_goods.overview') %>
+      </p>
+      <p class="<%= css.paragraph %>">
+        <%= t('tos.purchasable_goods.payment') %>
+      </p>
+      <p class="<%= css.paragraph %>">
+        <%= t('tos.purchasable_goods.purchases') %>
+      </p>
+    </section>
+  <% } %>
+
+  <!-- Subscriptions -->
+  <% if (config.terms.subscription) { %>
+    <section id="section-subscriptions" class="<%= css.section %>">
+      <h2 class="<%= css.subheading %>"><%= t('tos.sections.subscriptions') %></h2>
+      <p class="<%= css.paragraph %>">
+        <%= t('tos.subscriptions.overview') %>
+      </p>
+      <% if (config.terms.freeTrial) { %>
+        <p class="<%= css.paragraph %>">
+          <%= t('tos.subscriptions.free_trial') %>
+        </p>
+      <% } %>
+      <% if (config.terms.autoRenew) { %>
+        <p class="<%= css.paragraph %>">
+          <%= t('tos.subscriptions.auto_renew') %>
+        </p>
+      <% } %>
+      <% if (config.terms.refundPolicy === 'none') { %>
+        <p class="<%= css.paragraph %>">
+          <%= t('tos.subscriptions.refund_none') %>
+        </p>
+      <% } else if (config.terms.refundPolicy === 'full') { %>
+        <p class="<%= css.paragraph %>">
+          <%= t('tos.subscriptions.refund_full') %>
+        </p>
+      <% } else if (config.terms.refundPolicy === 'prorata') { %>
+        <p class="<%= css.paragraph %>">
+          <%= t('tos.subscriptions.refund_pro_rata') %>
+        </p>
+      <% } %>
+    </section>
+  <% } %>
+
+  <!-- Prohibited Use -->
+  <section id="section-prohibited-use" class="<%= css.section %>">
+    <h2 class="<%= css.subheading %>"><%= t('tos.sections.prohibited_use') %></h2>
+    <p class="<%= css.paragraph %>">
+      <%= t('tos.prohibited_use.overview') %>
+    </p>
+    <ul class="<%= css.ul_class %>">
+      <% config.terms.prohibitedUses.forEach(function(use) { %>
+        <li class="<%= css.paragraph %>">
+          <%= t(`tos.prohibited_use.${use}`, use) %>
+        </li>
+      <% }); %>
+    </ul>
+  </section>
+
+  <!-- Termination -->
+  <section id="section-termination" class="<%= css.section %>">
+    <h2 class="<%= css.subheading %>"><%= t('tos.sections.termination') %></h2>
+    <p class="<%= css.paragraph %>">
+      <%= t('tos.termination.overview') %>
+    </p>
+    <p class="<%= css.paragraph %>">
+      <%= t('tos.termination.effect') %>
+    </p>
+    <p class="<%= css.paragraph %>">
+      <%= t('tos.termination.severability') %>
+    </p>
+    <p class="<%= css.paragraph %>">
+      <%= t('tos.termination.waiver') %>
+    </p>
+  </section>
+
+  <!-- Governing Law -->
+  <section id="section-governing-law" class="<%= css.section %>">
+    <h2 class="<%= css.subheading %>"><%= t('tos.sections.governing_law') %></h2>
+    <p class="<%= css.paragraph %>">
+      <%= t('tos.governing_law.overview', { governing_law: config.terms.governingLaw }) %>
+    </p>
+  </section>
+
+  <!-- Disputes -->
+  <section id="section-disputes" class="<%= css.section %>">
+    <h2 class="<%= css.subheading %>"><%= t('tos.sections.disputes') %></h2>
+    <% if (config.terms.mediation) { %>
+      <p class="<%= css.paragraph %>">
+        <%= t('tos.disputes.mediation') %>
+      </p>
+    <% } %>
+    <% if (config.terms.disputeResolution === 'arbitration') { %>
+      <p class="<%= css.paragraph %>">
+        <%= t('tos.disputes.arbitration', { governing_law: config.terms.governingLaw }) %>
+      </p>
+    <% } %>
+    <% if (config.terms.disputeResolution === 'litigation') { %>
+      <p class="<%= css.paragraph %>">
+        <%= t('tos.disputes.litigation', { governing_law: config.terms.governingLaw }) %>
+      </p>
+    <% } %>
+  </section>
+
+  <!-- Availability -->
+  <section id="section-availability" class="<%= css.section %>">
+    <h2 class="<%= css.subheading %>"><%= t('tos.sections.availability') %></h2>
+    <p class="<%= css.paragraph %>">
+      <%= t('tos.availability.as_is') %>
+    </p>
+    <p class="<%= css.paragraph %>">
+      <%= t('tos.availability.maintenance') %>
+    </p>
+    <p class="<%= css.paragraph %>">
+      <%= t('tos.availability.warranty') %>
+    </p>
+    <% if (config.terms.serviceSla)  { %>
+      <p class="<%= css.paragraph %>">
+        <%= t('tos.availability.sla') %>
+      </p>
+      <% if (config.terms.serviceSlaCustom) { %>
+        <p class="<%= css.paragraph %>">
+          <%= config.terms.serviceSlaCustom %>
+        </p>
+      <% } else { %>
+        <p class="<%= css.paragraph %>">
+          <%= t('tos.availability.sla_details', { amount: config.terms.serviceSlaAmount, timeframe: config.terms.serviceSlaTimeframe }) %>
+        </p>
+      <% } %>
+      <% if (config.terms.serviceSlaRefund) { %>
+        <p class="<%= css.paragraph %>">
+          <%= t('tos.availability.sla_refund', { refund: config.terms.serviceSlaRefundType }) %>
+        </p>
+      <% } %>
+    <% } %>
+  </section>
+
+  <!-- Liability Limitation -->
+  <% if (config.terms.liabilityLimitation) { %>
+    <section id="section-liability-limitation" class="<%= css.section %>">
+      <h2 class="<%= css.subheading %>"><%= t('tos.sections.liability_limitation') %></h2>
+      <p class="<%= css.paragraph %>">
+        <%= t('tos.liability_limitation.overview') %>
+      </p>
+      <% if (config.terms.liabilityLimitationType === 'amount_paid') { %>
+        <p class="<%= css.paragraph %>">
+          <%= t('tos.liability_limitation.amount_paid', { timeframe: config.terms.liabilityLimitationTimeframe }) %>
+        </p>
+      <% } else if (config.terms.liabilityLimitationType === 'amount') { %>
+        <p class="<%= css.paragraph %>">
+          <%= t('tos.liability_limitation.amount', { amount: config.terms.liabilityLimitationAmount }) %>
+        </p>
+      <% } else if (config.terms.liabilityLimitationType === 'min_amount_paid_or_amount') { %>
+        <p class="<%= css.paragraph %>">
+          <%= t('tos.liability_limitation.min_amount_paid_or_amount', { timeframe: config.terms.liabilityLimitationTimeframe, amount: config.terms.liabilityLimitationAmount }) %>
+        </p>
+      <% } %>
+      <p class="<%= css.paragraph %>">
+        <%= t('tos.liability_limitation.exceptions') %>
+      </p>
+    </section>
+  <% } %>
+
+  <!-- Indemnification -->
+  <section id="section-indemnification" class="<%= css.section %>">
+    <h2 class="<%= css.subheading %>"><%= t('tos.sections.indemnification') %></h2>
+    <p class="<%= css.paragraph %>">
+      <%= t('tos.indemnification.overview') %>
+    </p>
+  </section>
+
+  <!-- Contact -->
+  <section id="section-contact" class="<%= css.section %>">
+    <h2 class="<%= css.subheading %>"><%= t('tos.sections.contact') %></h2>
+    <p class="<%= css.paragraph %>">
+      <%- t('tos.contact.text', { support_email: config.terms.supportEmail, link_class: css.link }) %>
+    </p>
+    <p class="<%= css.paragraph %>">
+      <%= config.entity.name %>
+    </p>
+    <% if (config.entity.address) { %>
+      <p class="<%= css.paragraph %>">
+        <%= t('tos.contact.address', { entity_address: config.entity.address, link_class: css.link }) %>
+      </p>
+    <% } %>
+  </section>
+</div>

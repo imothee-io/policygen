@@ -1,0 +1,19 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Main icon elements -->
+  <g>
+    <!-- Document base -->
+    <rect x="10" y="5" width="80" height="90" rx="4" fill="#2c3e50" />
+
+    <!-- Document corner fold -->
+    <path d="M75 5 L90 20 L75 20 Z" fill="#456789" />
+
+    <!-- Page lines (subtle) -->
+    <rect x="20" y="25" width="60" height="2" rx="1" fill="#8fa3b5" opacity="0.6" />
+    <rect x="20" y="33" width="60" height="2" rx="1" fill="#8fa3b5" opacity="0.6" />
+    <rect x="20" y="41" width="50" height="2" rx="1" fill="#8fa3b5" opacity="0.6" />
+
+    <!-- Smaller, more angled brackets -->
+    <path d="M45 60 L35 70 L45 80" stroke="#ecf0f1" stroke-width="3" fill="none" stroke-linejoin="miter" />
+    <path d="M55 60 L65 70 L55 80" stroke="#ecf0f1" stroke-width="3" fill="none" stroke-linejoin="miter" />
+  </g>
+</svg>

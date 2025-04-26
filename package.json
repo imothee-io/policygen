@@ -1,0 +1,31 @@
+{
+	"name": "policygen",
+	"description": "A privacy and terms of service policygenerator for your website or app",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/imothee/policygen.git"
+	},
+	"keywords": [
+		"privacy",
+		"tos"
+	],
+	"author": "imothee.xyz",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/imothee/policygen/issues"
+	},
+	"homepage": "https://github.com/imothee/policygen#readme",
+	"workspaces": [
+		"packages/docs",
+		"packages/policygen"
+	],
+	"scripts": {
+		"build:docs": "npm run build --workspace=packages/docs",
+		"build:policygen": "npm run build --workspace=packages/policygen",
+		"dev:docs": "npm run dev --workspace=packages/docs",
+		"test:policygen": "npm run test --workspace=packages/policygen"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.0.0-beta.1"
+	}
+}

@@ -1,0 +1,404 @@
+<div id="policygen-privacy-policy" class="<%= css.container %>">
+  <h1 class="<%= css.heading %>"><%= t('privacy_policy.title') %></h1>
+  <h3 class="<%= css.tertiary %>"><%= t('privacy_policy.last_updated', { updated: updated }) %></h3>
+  
+  <!-- Privacy notice -->
+  <section class="<%= css.section %>">
+    <p class="<%= css.paragraph %>">
+      <%- t('privacy_policy.privacy_notice', { entity_name: config.entity.name, entity_website: config.entity.website, link_class: css.link }) %>
+    </p>
+    <ul class="<%= css.list %>">
+      <% config.privacy.platforms.forEach(function(platform) { %>
+        <% if (platform == 'web') { %>
+          <li><%- t('privacy_policy.privacy_notice_web', { entity_website: config.entity.website, link_class: css.link }) %></li>
+        <% } else if (platform == 'mobile') { %>
+          <li><%= t('privacy_policy.privacy_notice_mobile') %></li>
+        <% } %>
+      <% }); %>
+      <li><%= t('privacy_policy.privacy_notice_other') %></li>
+    </ul>
+    <p class="<%= css.paragraph %>">
+      <%- t('privacy_policy.privacy_questions', { privacy_email: config.privacy.privacyEmail, link_class: css.link }) %>
+    </p>
+  </section>
+
+  <!-- Summary -->
+  <section class="<%= css.section %>">
+    <h2 class="<%= css.subheading %>"><%= t('privacy_policy.summary.title') %></h2>
+    <p class="<%= css.paragraph %>">
+      <%= t('privacy_policy.summary.text') %>
+    </p>
+    <p class="<%= css.paragraph %>">
+      <span class="<%= css.bold %>"><%= t('privacy_policy.summary.personal_information_question') %></span>
+      <% if (config.privacy.personalInformation.length === 0) { %>
+        <%= t('privacy_policy.summary.personal_information_no') %>
+      <% } else { %>
+        <%= t('privacy_policy.summary.personal_information_yes') %>
+        <a href="#personal-information" class="<%= css.link %>"><%= t('privacy_policy.summary.personal_information_link') %></a>
+      <% } %>
+    </p>
+    <p class="<%= css.paragraph %>">
+      <span class="<%= css.bold %>"><%= t('privacy_policy.summary.sensitive_information_question') %></span>
+      <% if (config.privacy.sensitiveInformation.length === 0) { %>
+        <%= t('privacy_policy.summary.sensitive_information_no') %>
+      <% } else { %>
+        <%= t('privacy_policy.summary.sensitive_information_yes') %>
+        <a href="#sensitive-information" class="<%= css.link %>"><%= t('privacy_policy.summary.sensitive_information_link') %></a>
+      <% } %>
+    </p>
+    <p class="<%= css.paragraph %>">
+      <span class="<%= css.bold %>"><%= t('privacy_policy.summary.third_party_information_question') %></span>
+      <% if (config.privacy.thirdPartyData.length === 0) { %>
+        <%= t('privacy_policy.summary.third_party_information_no') %>
+      <% } else { %>
+        <%= t('privacy_policy.summary.third_party_information_yes') %>
+        <a href="#third-party-data" class="<%= css.link %>"><%= t('privacy_policy.summary.third_party_information_link') %></a>
+      <% } %>
+    </p>
+    <p class="<%= css.paragraph %>">
+      <span class="<%= css.bold %>"><%= t('privacy_policy.summary.third_party_sharing_question') %></span>
+      <% if (!config.privacy.thirdParty_disclosure && !config.privacy.thirdPartySharing) { %>
+        <%= t('privacy_policy.summary.third_party_sharing_no') %>
+      <% } else { %>
+        <%= t('privacy_policy.summary.third_party_sharing_yes') %>
+        <a href="#third-party-sharing" class="<%= css.link %>"><%= t('privacy_policy.summary.third_party_sharing_link') %></a>
+      <% } %>
+    </p>
+    <p class="<%= css.paragraph %>">
+      <span class="<%= css.bold %>"><%= t('privacy_policy.summary.process_information_question') %></span>
+      <%= t('privacy_policy.summary.process_information') %>
+      <a href="#processing" class="<%= css.link %>"><%= t('privacy_policy.summary.process_information_link') %></a>
+    </p>
+    <% if (config.privacy.securityMeasures) { %>
+      <p class="<%= css.paragraph %>">
+        <span class="<%= css.bold %>"><%= t('privacy_policy.summary.security_measures_question') %></span>
+        <%= t('privacy_policy.summary.security_measures') %>
+        <a href="#security" class="<%= css.link %>"><%= t('privacy_policy.summary.security_measures_link') %></a>
+      </p>
+    <% } %>
+    <p class="<%= css.paragraph %>">
+      <span class="<%= css.bold %>"><%= t('privacy_policy.summary.rights_question') %></span>
+      <% if (config.privacy.privacyPage) { %>
+        <%= t('privacy_policy.summary.rights_link', { privacy_page: config.privacy.privacyPage, privacy_email: config.privacy.privacyEmail, link_class: css.link }) %>
+      <% } else { %>
+        <%= t('privacy_policy.summary.rights', { privacy_email: config.privacy.privacyEmail, link_class: css.link }) %>
+      <% } %>
+    </p>
+  </section>
+
+  <!-- Policy Sections -->
+  <section class="<%= css.section %>">
+    <h2 class="<%= css.subheading %>"><%= t('privacy_policy.sections.title') %></h1>
+    <ol class="<%= css.ol_class %>">
+      <li><a href="#section-collected-information" class="<%= css.link %>"><%= t('privacy_policy.sections.information_we_collect') %></a></li>
+      <li><a href="#section-use" class="<%= css.link %>"><%= t('privacy_policy.sections.how_we_use_information') %></a></li>
+      <li><a href="#legal-basis" class="<%= css.link %>"><%= t('privacy_policy.sections.legal_basis') %></a></li>
+      <li><a href="#section-third-party-sharing" class="<%= css.link %>"><%= t('privacy_policy.sections.third_party_sharing') %></a></li>
+      <% if (config.privacy.webTracking) { %> 
+        <li><a href="#section-web-tracking" class="<%= css.link %>"><%= t('privacy_policy.sections.web_tracking') %></a></li>
+      <% } %>
+      <% if (config.privacy.securityMeasures) { %>
+        <li><a href="#section-security" class="<%= css.link %>"><%= t('privacy_policy.sections.security') %></a></li>
+      <% } %>
+      <li><a href="section-data-retention" class="<%= css.link %>"><%= t('privacy_policy.sections.data_retention') %></a></li>
+      <% if (config.privacy.usStatePrivacyLaws) { %>
+        <li><a href="#section-us-state-privacy-laws" class="<%= css.link %>"><%= t('privacy_policy.sections.us_state_privacy_laws') %></a></li>
+      <% } %>
+      <li><a href="#section-privacy-rights" class="<%= css.link %>"><%= t('privacy_policy.sections.privacy_rights') %></a></li>
+      <li><a href="#section-privacy-policy-changes" class="<%= css.link %>"><%= t('privacy_policy.sections.policy_changes') %></a></li>
+      <li><a href="#section-contact" class="<%= css.link %>"><%= t('privacy_policy.sections.contact') %></a></li>
+    </ol>
+  </section>
+
+  <!-- Collected Information -->
+  <section id="section-collected-information" class="<%= css.section %>">
+    <h2 class="<%= css.subheading %>"><%= t('privacy_policy.sections.information_we_collect') %></h2>
+    <!-- Disclosed -->
+    <h3 class="<%= css.tertiary %>"><%= t('privacy_policy.information_we_collect.disclosed.heading') %></h3>
+    <!-- Personal -->
+    <% if (config.privacy.personalInformation.length === 0) { %>
+      <p class="<%= css.paragraph %>">
+        <%= t('privacy_policy.information_we_collect.disclosed.no_personal_information') %>
+      </p>
+    <% } else { %>
+      <p id="personal-information" class="<%= css.paragraph %>">
+        <%= t('privacy_policy.information_we_collect.disclosed.personal_information') %>
+      </p>
+      <ul class="<%= css.list %>">
+      <% config.privacy.personalInformation.forEach(function(info) { %>
+        <li><%= t(`privacy_policy.information_we_collect.disclosed.${info}`, info) %></li>
+      <% }); %>
+      </ul>
+    <% } %>
+    <!-- Sensitive -->
+    <% if (config.privacy.sensitiveInformation.length === 0) { %>
+      <p class="<%= css.paragraph %>">
+        <%= t('privacy_policy.information_we_collect.disclosed.no_sensitive_information') %>
+      </p>
+    <% } else { %>
+      <p id="sensitive-information" class="<%= css.paragraph %>">
+        <%= t('privacy_policy.information_we_collect.disclosed.sensitive_information') %>
+      </p>
+      <ul class="<%= css.list %>">
+      <% config.privacy.sensitiveInformation.forEach(function(info) { %>
+        <li><%= t(`privacy_policy.information_we_collect.disclosed.${info}`, info) %></li>
+      <% }); %>
+      </ul>
+    <% } %>
+    <!-- Payment Data -->
+    <% if (config.privacy.paymentData) { %>
+      <p class="<%= css.paragraph %>">
+        <%= t('privacy_policy.information_we_collect.disclosed.payment_data') %>
+      </p>
+      <% if (!config.privacy.paymentProcessors.length === 0) { %>
+        <p class="<%= css.paragraph %>">
+          <%= t("privacy_policy.information_we_collect.disclosed.payment_processor") %>
+        </p>
+        <ul class="<%= css.list %>">
+        <% config.privacy.paymentProcessors.forEach(function(processor) { %>
+          <li><a href="<%= processor %>" class="<%= css.link %>"><%= processor %></a></li>
+        <% }); %>
+        </ul>
+      <% } %>
+    <% } %>
+    <!-- Social Login -->
+    <% if (config.privacy.socialSignIn) { %>
+      <p class="<%= css.paragraph %>">
+        <%= t('privacy_policy.information_we_collect.disclosed.social_sign_in') %>
+      </p>
+    <% } %>
+    
+    <!-- Derived Collected -->
+    <% if (config.privacy.appUsageData || config.privacy.webTracking) { %>
+      <h3 class="<%= css.tertiary %>"><%= t('privacy_policy.information_we_collect.derived.heading') %></h3>
+      <!-- App Usage Data -->
+      <% if (config.privacy.appUsageData) { %>
+        <p class="<%= css.paragraph %>">
+          <%= t('privacy_policy.information_we_collect.derived.app_usage_data') %>
+        </p>
+      <% } %>
+      <!-- Web Tracking -->
+      <% if (config.privacy.webTracking) { %>
+        <p class="<%= css.paragraph %>">
+          <%= t('privacy_policy.information_we_collect.derived.cookies') %>
+        </p>
+        <p class="<%= css.paragraph %>">
+          <%= t('privacy_policy.information_we_collect.derived.web_tracking') %>
+        </p>
+      <% } %>
+    <% } %>
+
+    <!-- Third Party -->
+    <% if (config.privacy.thirdPartyData.length > 0) { %>
+      <h3 id="third-party-data" class="<%= css.subheading %>"><%= t('privacy_policy.information_we_collect.third_party.heading') %></h3>
+      <p class="<%= css.paragraph %>">
+        <%= t('privacy_policy.information_we_collect.third_party.data') %>
+      </p>
+      <ul class="<%= css.list %>">
+      <% config.privacy.thirdPartyData.forEach(function(info) { %>
+        <li><%= t(`privacy_policy.information_we_collect.third_party.${info}`, info) %></li>
+      <% }); %>
+      </ul>
+    <% } %>
+  </section>
+
+  <!-- Use of Information -->
+  <section id="section-use" class="<%= css.section %>">
+    <h2 class="<%= css.subheading %>"><%= t('privacy_policy.sections.how_we_use_information') %></h2>
+    <p class="<%= css.paragraph %>">
+      <%= t('privacy_policy.how_we_use_information.usage') %>
+    </p>
+    <% if (config.privacy.serviceRequirements.length > 0) { %>
+      <p class="<%= css.paragraph %>">
+        <%= t('privacy_policy.how_we_use_information.specifics') %>
+      </p>
+      <ul class="<%= css.list %>">
+        <% config.privacy.serviceRequirements.forEach(function(requirement) { %>
+          <li><%= t(`privacy_policy.how_we_use_information.${requirement}`, requirement) %></li>
+        <% }); %>
+      </ul>
+    <% } %>
+  </section>
+
+  <!-- Legal Basis -->
+  <section id="legal-basis" class="<%= css.section %>">
+    <h2 class="<%= css.subheading %>"><%= t('privacy_policy.sections.legal_basis') %></h2>
+    <p class="<%= css.paragraph %>">
+      <%= t('privacy_policy.legal_basis.text') %>
+    </p>
+    <ul class="<%= css.list %>">
+      <li><%= t('privacy_policy.legal_basis.consent') %></li>
+      <li><%= t('privacy_policy.legal_basis.contract') %></li>
+      <li><%= t('privacy_policy.legal_basis.legal') %></li>
+      <li><%= t('privacy_policy.legal_basis.vital_interests') %></li>
+      <li><%= t('privacy_policy.legal_basis.public_interest') %></li>
+      <li>
+        <%= t('privacy_policy.legal_basis.legitimate_interests') %>
+        <ul class="<%= css.list %>">
+          <% config.privacy.legalBasis.forEach(function(basis) { %>
+            <li><%= t(`privacy_policy.legal_basis.${basis}`, basis) %></li>
+          <% }); %>
+        </ul>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Third Party Sharing -->
+  <section id="section-third-party-sharing" class="<%= css.section %>">
+    <h2 class="<%= css.subheading %>"><%= t('privacy_policy.sections.third_party_sharing') %></h2>
+    <% if (config.privacy.thirdPartyDisclosure) { %>
+      <p class="<%= css.paragraph %>">
+        <%= t('privacy_policy.third_party_sharing.disclosure') %>
+      </p>
+      <% if (config.privacy.thirdPartyDisclosureEntities.length > 0) { %>
+        <p class="<%= css.paragraph %>">
+          <%= t('privacy_policy.third_party_sharing.disclosure_entities') %>
+        </p>
+        <ul class="<%= css.list %>">
+        <% config.privacy.thirdPartyDisclosureEntities.forEach(function(disclosure) { %>
+          <li><%= t(`privacy_policy.third_party_sharing.disclosure.${disclosure}`, disclosure) %></li>
+        <% }); %>
+        </ul>
+      <% } %>
+    <% } %>
+    <p class="<%= css.paragraph %>">
+      <%= t('privacy_policy.third_party_sharing.business_transfers') %>
+    </p>
+  </section>
+
+  <!-- Web Tracking -->
+  <% if (config.privacy.webTracking || config.privacy.thirdPartyAnalytics) { %>
+    <section id="section-web-tracking" class="<%= css.section %>">
+      <h2 class="<%= css.subheading %>"><%= t('privacy_policy.sections.web_tracking') %></h2>
+      <p class="<%= css.paragraph %>">
+        <%= t('privacy_policy.web_tracking.text') %>
+      </p>
+      <% if (config.privacy.webTracking) { %>
+        <p class="<%= css.paragraph %>">
+          <%= t('privacy_policy.web_tracking.cookies') %>
+        </p>
+        <p class="<%= css.paragraph %>">
+          <%= t('privacy_policy.web_tracking.web_beacons') %>
+        </p>
+      <% } %>
+      <% if (config.privacy.thirdPartyAnalytics) { %>
+        <p class="<%= css.paragraph %>">
+          <%= t('privacy_policy.web_tracking.analytics') %>
+        </p>
+      <% } %>
+    </section>
+  <% } %>
+
+  <!-- Security Measures -->
+  <% if (config.privacy.securityMeasures) { %>
+    <section id="section-security" class="<%= css.section %>">
+      <h2 class="<%= css.subheading %>"><%= t('privacy_policy.sections.security') %></h2>
+      <p class="<%= css.paragraph %>">
+        <%= t('privacy_policy.security.text') %>
+      </p>
+    </section>
+  <% } %>
+
+  <!-- Data Retention -->
+  <section id="section-data-retention" class="<%= css.section %>">
+    <h2 class="<%= css.subheading %>"><%= t('privacy_policy.sections.data_retention') %></h2>
+    <p class="<%= css.paragraph %>">
+      <%= t('privacy_policy.data_retention.text') %>
+    </p>
+    <p class="<%= css.paragraph %>">
+      <% if (config.privacy.dataRetentionPeriod) { %>
+        <%= t('privacy_policy.data_retention.duration_custom', { duration: config.privacy.dataRetentionPeriod }) %>
+      <% } else { %>
+        <%= t('privacy_policy.data_retention.duration_default') %>
+      <% } %>
+    </p>
+    <p class="<%= css.paragraph %>">
+      <%= t('privacy_policy.data_retention.deletion') %>
+    </p>
+  </section>
+
+  <!-- US State Privacy Laws -->
+  <% if (config.privacy.usStatePrivacyLaws) { %>
+    <section id="section-us-state-privacy-laws" class="<%= css.section %>">
+      <h2 class="<%= css.subheading %>"><%= t('privacy_policy.sections.us_state_privacy_laws') %></h2>
+      
+      <!-- California -->
+      <h3 class="<%= css.tertiary %>"><%= t('privacy_policy.us_state_privacy_laws.california.heading') %></h3>
+      <p class="<%= css.paragraph %>">
+        <%= t('privacy_policy.us_state_privacy_laws.california.text') %>
+      </p>
+      <ul class="<%= css.list %>">
+        <li><%- t('privacy_policy.us_state_privacy_laws.california.right_to_know', { privacy_email: config.privacy.privacyEmail, link_class: css.link }) %></li>
+        <li><%- t('privacy_policy.us_state_privacy_laws.california.right_to_delete', { privacy_email: config.privacy.privacyEmail, link_class: css.link }) %></li>
+        <li><%- t('privacy_policy.us_state_privacy_laws.california.right_to_opt_out', { privacy_email: config.privacy.privacyEmail, link_class: css.link }) %></li>
+      </ul>
+      <h3 class="<%= css.tertiary %>"><%= t('privacy_policy.us_state_privacy_laws.california.do_not_track_heading') %></h3>
+      <p class="<%= css.paragraph %>">
+        <%= t('privacy_policy.us_state_privacy_laws.california.do_not_track') %>
+      </p>
+      <h3 class="<%= css.tertiary %>"><%= t('privacy_policy.us_state_privacy_laws.california.shine_the_light_heading') %></h3>
+      <p class="<%= css.paragraph %>">
+        <%- t('privacy_policy.us_state_privacy_laws.california.shine_the_light', { privacy_email: config.privacy.privacyEmail, link_class: css.link }) %>
+      </p>
+      <h3 class="<%= css.tertiary %>"><%= t('privacy_policy.us_state_privacy_laws.california.minors_heading') %></h3>
+      <p class="<%= css.paragraph %>">
+        <%- t('privacy_policy.us_state_privacy_laws.california.minors', { privacy_email: config.privacy.privacyEmail, link_class: css.link }) %>
+      </p>
+    </section>
+  <% } %>
+
+  <!-- Privacy Rights -->
+  <section id="section-privacy-rights" class="<%= css.section %>">
+    <h2 class="<%= css.subheading %>"><%= t('privacy_policy.sections.privacy_rights') %></h2>
+    <p class="<%= css.paragraph %>">
+      <%= t('privacy_policy.privacy_rights.text') %>
+    </p>
+    <% if (config.privacy.privacyPage) { %>
+      <p class="<%= css.paragraph %>">
+        <%- t('privacy_policy.privacy_rights.access_page', { privacy_page: config.privacy.privacyPage, privacy_email: config.privacy.privacyEmail, link_class: css.link }) %>
+      </p>
+    <% } else { %>
+      <p class="<%= css.paragraph %>">
+        <%- t('privacy_policy.privacy_rights.access_email', { privacy_email: config.privacy.privacyEmail, link_class: css.link }) %>
+      </p>
+    <% } %>
+    <p class="<%= css.paragraph %>">
+      <%- t('privacy_policy.privacy_rights.objection', { privacy_email: config.privacy.privacyEmail, link_class: css.link }) %>
+    </p>
+  </section>
+
+  <!-- Privacy Policy Changes -->
+  <section id="section-privacy-policy-changes" class="<%= css.section %>">
+    <h2 class="<%= css.subheading %>"><%= t('privacy_policy.sections.policy_changes') %></h2>
+    <p class="<%= css.paragraph %>">
+      <%= t('privacy_policy.policy_changes.text') %>
+    </p>
+  </section>
+
+  <!-- Contact -->
+  <section id="section-contact" class="<%= css.section %>">
+    <h2 class="<%= css.subheading %>"><%= t('privacy_policy.sections.contact') %></h2>
+    <p class="<%= css.paragraph %>">
+      <%- t('privacy_policy.contact.text', { privacy_email: config.privacy.privacyEmail, link_class: css.link }) %>
+    </p>
+    <p class="<%= css.paragraph %>">
+      <%= config.entity.name %>
+    </p>
+    <% if (config.entity.address) { %>
+      <p class="<%= css.paragraph %>">
+        <%= t('privacy_policy.contact.address', { entity_address: config.entity.address }) %>
+      </p>
+    <% } %>
+    <% if (config.privacy.dpo) { %>
+      <p class="<%= css.paragraph %>">
+        <%= t('privacy_policy.contact.dpo', { dpo_name: config.privacy.dpoName }) %>
+      </p>
+      <p>
+        <%- t('privacy_policy.contact.dpo_email', { dpo_email: config.privacy.dpoEmail, link_class: css.link }) %>
+      </p>
+      <p>
+        <%= t('privacy_policy.contact.dpo_phone', { dpo_phone: config.privacy.dpoPhone }) %>
+      </p>
+    <% } %>
+  </section>
+</div>

@@ -1,0 +1,35 @@
+---
+title: PolicyGen
+description: Crafted policies in minutes, driven by code and config.
+template: splash
+hero:
+  tagline: Generate Privacy & Terms of Service Docs Programatically
+  image:
+    file: ../../assets/policy-builder.png
+  actions:
+    - text: Get Started
+      link: /getting-started/
+      icon: right-arrow
+    - text: View on Github
+      link: https://github.com/imothee/policygen
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Features
+
+<CardGrid>
+	<Card title="Codify your policies" icon="pencil">
+		Track your companies policies in code not docs.
+	</Card>
+	<Card title="Generate" icon="add-document">
+		Generate your policies automatically and track policy changes.
+	</Card>
+  <Card title="Legal not included" icon="information">
+    Ship your policies in minutes without the need for a lawyer*
+    <br />
+    <small>*Disclaimer: PolicyGen is not a substitute for legal advice. Always consult with a qualified attorney for legal matters.</small>
+  </Card>
+</CardGrid>

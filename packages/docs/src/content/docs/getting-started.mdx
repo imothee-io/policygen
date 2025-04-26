@@ -1,0 +1,57 @@
+---
+title: Getting Started
+description: Get up and running with PolicyGen
+---
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+
+PolicyGen is a way to codify your privacy and terms of service policies and auto-generate great looking pages for your website.
+
+## Quick Start
+
+### Installation
+
+You can use PolicyGen by installing a local copy into your node modules or using npx.
+
+```bash title="npm"
+npm install --save-dev policygen
+```
+
+### Configuration
+
+You will need to create a `policygen.json` configuration file for each project. 
+This is necessary to specify the specifics policies that your company implements.
+
+To create the `policygen.json` file, run the `init` command in the root folder of your project.
+
+```bash title="npm"
+npx policygen init
+```
+
+The init function will walk you through answering a bunch of policy questions in a wizard format, if you want to skip the wizard feel free to pass `--default` to emit a blank default `policygen.json` file instead.
+
+### Generation
+
+Once your `policygen.json` file is setup you can generate your policy files.
+
+Generate takes flags to specify which policies you want to generate, default `:all`
+
+<Tabs>
+<TabItem label="generate:all">
+  ```bash title="generate:all"
+  npx policygen generate
+  ```
+</TabItem>
+<TabItem label="generate:privacy">
+
+  ```bash title="generate:privacy"
+  npx policy generate:privacy
+  ```
+</TabItem>
+<TabItem label="generate:terms">
+
+  ```bash title="generate:terms"
+  npx policy generate:terms
+  ```
+</TabItem>
+</Tabs>

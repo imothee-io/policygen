@@ -1,0 +1,567 @@
+{
+  "type": "object",
+  "properties": {
+    "output": {
+      "type": "object",
+      "properties": {
+        "privacyFilePath": {
+          "type": "string",
+          "title": "privacyFilePath"
+        },
+        "termsFilePath": {
+          "type": "string",
+          "title": "termsFilePath"
+        },
+        "fileType": {
+          "$ref": "#/definitions/FileType",
+          "title": "fileType"
+        },
+        "cssFramework": {
+          "$ref": "#/definitions/CSSFramework",
+          "title": "cssFramework"
+        },
+        "locales": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "const": "en"
+          },
+          "title": "locales"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "cssFramework",
+        "fileType",
+        "locales"
+      ],
+      "title": "output"
+    },
+    "entity": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "name"
+        },
+        "website": {
+          "type": "string",
+          "title": "website"
+        },
+        "address": {
+          "type": "string",
+          "title": "address"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "address",
+        "name",
+        "website"
+      ],
+      "title": "entity"
+    },
+    "privacy": {
+      "type": "object",
+      "properties": {
+        "privacyEmail": {
+          "type": "string",
+          "title": "privacyEmail"
+        },
+        "platforms": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Platforms"
+          },
+          "title": "platforms"
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Locations"
+          },
+          "title": "locations"
+        },
+        "socialSignIn": {
+          "type": "boolean",
+          "title": "socialSignIn"
+        },
+        "personalInformation": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PersonalInformation"
+          },
+          "title": "personalInformation"
+        },
+        "sensitiveInformation": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SensitiveInformation"
+          },
+          "title": "sensitiveInformation"
+        },
+        "thirdPartyData": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ThirdPartyData"
+          },
+          "title": "thirdPartyData"
+        },
+        "paymentData": {
+          "type": "boolean",
+          "title": "paymentData"
+        },
+        "paymentProcessors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "paymentProcessors"
+        },
+        "appUsageData": {
+          "type": "boolean",
+          "title": "appUsageData"
+        },
+        "thirdPartyDisclosure": {
+          "type": "boolean",
+          "title": "thirdPartyDisclosure"
+        },
+        "thirdPartyDisclosureEntities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "thirdPartyDisclosureEntities"
+        },
+        "thirdPartySharing": {
+          "type": "boolean",
+          "title": "thirdPartySharing"
+        },
+        "thirdPartySharingEntities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "thirdPartySharingEntities"
+        },
+        "securityMeasures": {
+          "type": "boolean",
+          "title": "securityMeasures"
+        },
+        "webTracking": {
+          "type": "boolean",
+          "title": "webTracking"
+        },
+        "thirdPartyAnalytics": {
+          "type": "boolean",
+          "title": "thirdPartyAnalytics"
+        },
+        "serviceRequirements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceRequirements"
+          },
+          "title": "serviceRequirements"
+        },
+        "legalBasis": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LegalBasis"
+          },
+          "title": "legalBasis"
+        },
+        "dataRetentionPeriod": {
+          "type": "string",
+          "title": "dataRetentionPeriod"
+        },
+        "usStatePrivacyLaws": {
+          "type": "boolean",
+          "title": "usStatePrivacyLaws"
+        },
+        "privacyPage": {
+          "type": "string",
+          "title": "privacyPage"
+        },
+        "dpo": {
+          "type": "boolean",
+          "title": "dpo"
+        },
+        "dpoName": {
+          "type": "string",
+          "title": "dpoName"
+        },
+        "dpoEmail": {
+          "type": "string",
+          "title": "dpoEmail"
+        },
+        "dpoPhone": {
+          "type": "string",
+          "title": "dpoPhone"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "appUsageData",
+        "dpo",
+        "legalBasis",
+        "locations",
+        "paymentData",
+        "paymentProcessors",
+        "personalInformation",
+        "platforms",
+        "privacyEmail",
+        "securityMeasures",
+        "sensitiveInformation",
+        "serviceRequirements",
+        "socialSignIn",
+        "thirdPartyAnalytics",
+        "thirdPartyData",
+        "thirdPartyDisclosure",
+        "thirdPartyDisclosureEntities",
+        "thirdPartySharing",
+        "thirdPartySharingEntities",
+        "usStatePrivacyLaws",
+        "webTracking"
+      ],
+      "title": "privacy"
+    },
+    "terms": {
+      "type": "object",
+      "properties": {
+        "underEighteen": {
+          "type": "boolean",
+          "title": "underEighteen"
+        },
+        "underThirteen": {
+          "type": "boolean",
+          "title": "underThirteen"
+        },
+        "purchasableGoods": {
+          "type": "boolean",
+          "title": "purchasableGoods"
+        },
+        "subscription": {
+          "type": "boolean",
+          "title": "subscription"
+        },
+        "freeTrial": {
+          "type": "boolean",
+          "title": "freeTrial"
+        },
+        "autoRenew": {
+          "type": "boolean",
+          "title": "autoRenew"
+        },
+        "refundPolicy": {
+          "$ref": "#/definitions/RefundPolicy",
+          "title": "refundPolicy"
+        },
+        "userContent": {
+          "type": "boolean",
+          "title": "userContent"
+        },
+        "userContentLicense": {
+          "type": "boolean",
+          "title": "userContentLicense"
+        },
+        "userAccounts": {
+          "type": "boolean",
+          "title": "userAccounts"
+        },
+        "governingLaw": {
+          "type": "string",
+          "title": "governingLaw"
+        },
+        "disputeResolution": {
+          "$ref": "#/definitions/DisputeResolution",
+          "title": "disputeResolution"
+        },
+        "mediation": {
+          "type": "boolean",
+          "title": "mediation"
+        },
+        "prohibitedUses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProhibitedUses"
+          },
+          "title": "prohibitedUses"
+        },
+        "serviceSLA": {
+          "type": "boolean",
+          "title": "serviceSLA"
+        },
+        "serviceSLAAmount": {
+          "type": "number",
+          "title": "serviceSLAAmount"
+        },
+        "serviceSLATimeframe": {
+          "type": "string",
+          "title": "serviceSLATimeframe"
+        },
+        "serviceSLARefund": {
+          "type": "boolean",
+          "title": "serviceSLARefund"
+        },
+        "serviceSLARefundType": {
+          "$ref": "#/definitions/RefundType",
+          "title": "serviceSLARefundType"
+        },
+        "serviceSLACustom": {
+          "type": "string",
+          "title": "serviceSLACustom"
+        },
+        "liabilityLimitation": {
+          "type": "boolean",
+          "title": "liabilityLimitation"
+        },
+        "liabilityLimitationType": {
+          "$ref": "#/definitions/LiabilityLimitationType",
+          "title": "liabilityLimitationType"
+        },
+        "liabilityLimitationTimeframe": {
+          "type": "string",
+          "title": "liabilityLimitationTimeframe"
+        },
+        "liabilityLimitationAmount": {
+          "type": "number",
+          "title": "liabilityLimitationAmount"
+        },
+        "supportEmail": {
+          "type": "string",
+          "title": "supportEmail"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "autoRenew",
+        "disputeResolution",
+        "freeTrial",
+        "governingLaw",
+        "liabilityLimitation",
+        "liabilityLimitationAmount",
+        "mediation",
+        "prohibitedUses",
+        "purchasableGoods",
+        "refundPolicy",
+        "serviceSLA",
+        "serviceSLAAmount",
+        "serviceSLARefund",
+        "subscription",
+        "supportEmail",
+        "underEighteen",
+        "underThirteen",
+        "userAccounts",
+        "userContent",
+        "userContentLicense"
+      ],
+      "title": "terms"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "entity",
+    "output"
+  ],
+  "definitions": {
+    "FileType": {
+      "title": "FileType",
+      "type": "string",
+      "enum": [
+        "html",
+        "astro"
+      ]
+    },
+    "CSSFramework": {
+      "title": "CSSFramework",
+      "type": "string",
+      "enum": [
+        "tailwind",
+        "daisyui",
+        "classes"
+      ]
+    },
+    "Platforms": {
+      "title": "Platforms",
+      "type": "string",
+      "enum": [
+        "web",
+        "mobile",
+        "desktop"
+      ]
+    },
+    "Locations": {
+      "title": "Locations",
+      "type": "string",
+      "enum": [
+        "us",
+        "eu",
+        "uk",
+        "other"
+      ]
+    },
+    "PersonalInformation": {
+      "title": "PersonalInformation",
+      "type": "string",
+      "enum": [
+        "name",
+        "email",
+        "phone",
+        "address",
+        "password",
+        "ipAddress",
+        "deviceId",
+        "creditCard",
+        "locationData",
+        "anonymizedUsageData"
+      ]
+    },
+    "SensitiveInformation": {
+      "title": "SensitiveInformation",
+      "type": "string",
+      "enum": [
+        "ssn",
+        "financial",
+        "health",
+        "biometric",
+        "genetic",
+        "political",
+        "sexualOrientation",
+        "criminalHistory",
+        "religion"
+      ]
+    },
+    "ThirdPartyData": {
+      "title": "ThirdPartyData",
+      "type": "string",
+      "enum": [
+        "advertising",
+        "analytics",
+        "socialMedia",
+        "purchase",
+        "email",
+        "support",
+        "crm",
+        "job",
+        "address",
+        "behavior"
+      ]
+    },
+    "ServiceRequirements": {
+      "title": "ServiceRequirements",
+      "type": "string",
+      "enum": [
+        "accounts",
+        "communication",
+        "orders"
+      ]
+    },
+    "LegalBasis": {
+      "title": "LegalBasis",
+      "type": "string",
+      "enum": [
+        "advertising",
+        "marketing",
+        "analytics",
+        "security",
+        "fraudPrevention"
+      ]
+    },
+    "RefundPolicy": {
+      "title": "RefundPolicy",
+      "type": "string",
+      "enum": [
+        "none",
+        "full",
+        "prorata"
+      ]
+    },
+    "DisputeResolution": {
+      "title": "DisputeResolution",
+      "type": "string",
+      "enum": [
+        "arbitration",
+        "litigation"
+      ]
+    },
+    "ProhibitedUses": {
+      "title": "ProhibitedUses",
+      "type": "string",
+      "enum": [
+        "crawling",
+        "illegal",
+        "harmful",
+        "infringing",
+        "abusive",
+        "spam",
+        "advertising",
+        "impersonation",
+        "accountTransfer"
+      ]
+    },
+    "RefundType": {
+      "title": "RefundType",
+      "type": "string",
+      "enum": [
+        "full",
+        "prorata"
+      ]
+    },
+    "LiabilityLimitationType": {
+      "title": "LiabilityLimitationType",
+      "type": "string",
+      "enum": [
+        "amount_paid",
+        "amount",
+        "minAmountPaidOrAmount"
+      ]
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "output": {
+            "type": "object",
+            "properties": {
+              "privacyFilePath": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "privacyFilePath"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "privacy"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "output": {
+            "type": "object",
+            "properties": {
+              "termsFilePath": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "termsFilePath"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "terms"
+        ]
+      }
+    }
+  ]
+}
