@@ -382,7 +382,7 @@ export const initCommand = new Command("init")
 						type: "confirm",
 						name: "userContentLicense",
 						message:
-							"Do you assign yourself a license of user uploaded conten?",
+							"Do you assign yourself a license of user uploaded content?",
 						default: defaultTermsConfig.userContentLicense,
 					},
 					{

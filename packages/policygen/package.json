@@ -1,6 +1,6 @@
 {
 	"name": "policygen",
-	"version": "0.5.1",
+	"version": "0.5.2",
 	"description": "A CLI tool to generate policies",
 	"bin": {
 		"policygen": "./dist/index.js"
