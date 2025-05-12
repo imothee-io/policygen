@@ -26,6 +26,6 @@
 		"test:policygen": "npm run test --workspace=packages/policygen"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.0.0-beta.1"
+		"@biomejs/biome": "^2.0.0-beta.2"
 	}
 }
