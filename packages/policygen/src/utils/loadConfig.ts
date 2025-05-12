@@ -18,13 +18,10 @@ export function loadConfig(): PolicygenConfig {
 	}
 
 	const raw = fs.readFileSync(configPath, "utf-8");
-	const parsed = JSON.parse(raw) as Partial<PolicygenConfig> & {
-		$schema?: string;
-	}; // Allow $schema as an extra field
+	const parsed = JSON.parse(raw) as Partial<PolicygenConfig>; // Allow $schema as an extra field
 
 	// Get the schema version from the `$schema` field
 	const schemaUrl = parsed.$schema;
-	delete parsed.$schema; // Remove the $schema field from the object
 	if (!schemaUrl) {
 		console.error("❌ Config file is missing the `$schema` field.");
 		process.exit(1);

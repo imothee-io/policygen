@@ -191,6 +191,7 @@ export type OutputConfig = {
 };
 
 export type PolicygenConfig = {
+	$schema?: string;
 	output: OutputConfig;
 	entity: EntityConfig;
 	privacy?: PrivacyConfig;
