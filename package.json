@@ -15,6 +15,7 @@
 		"url": "https://github.com/imothee-io/policygen/issues"
 	},
 	"homepage": "https://github.com/imothee-io/policygen#readme",
+	"packageManager": "pnpm@10.28.2",
 	"scripts": {
 		"build:docs": "pnpm --filter docs build",
 		"build:policygen": "pnpm --filter policygen build",

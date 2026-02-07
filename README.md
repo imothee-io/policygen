@@ -1,53 +1,108 @@
-# My NPM Workspace
+# PolicyGen
 
-This is a monorepo setup using npm workspaces that contains two main packages: `docs` and `policygen`.
+Generate privacy and terms of service policies for your website or app. Define your policy config once in JSON, then generate well-structured HTML or Astro pages automatically.
 
-## Packages
+[Documentation](https://policygen.xyz) | [GitHub](https://github.com/imothee-io/policygen)
 
-### Docs
+---
 
-The `docs` package is an Astro Starlight site that serves as the documentation for the project. It includes:
+## Quick Start
 
-- **Main Entry Point**: Located at `packages/docs/src/index.astro`, this file defines the structure and content of the documentation site using Astro syntax.
-- **Configuration**: The `packages/docs/package.json` file lists the dependencies specific to the Astro site and any scripts for building or serving the site.
-- **Astro Configuration**: The `packages/docs/astro.config.mjs` file contains the configuration settings for the Astro project, specifying input and output directories, as well as any integrations or plugins used.
+### Installation
 
-### Policygen
+```bash
+npm install --save-dev policygen
+```
 
-The `policygen` package is a CLI tool designed to generate policies. It includes:
+Or use directly with `npx`:
 
-- **Main Entry Point**: Located at `packages/policygen/src/index.ts`, this file contains the logic for generating policies and may include functions for parsing input and outputting generated policies.
-- **Configuration**: The `packages/policygen/package.json` file lists the dependencies required for the CLI tool and any scripts for building or running the tool.
-- **TypeScript Configuration**: The `packages/policygen/tsconfig.json` file specifies the compiler options, including target, module, and any type definitions needed for the policygen package.
+```bash
+npx policygen init
+```
 
-## Setup Instructions
+### Configuration
 
-1. Clone the repository:
-   ```
-   git clone <repository-url>
-   cd my-npm-workspace
-   ```
+Create a `policygen.json` config file in your project root:
 
-2. Install dependencies:
-   ```
-   npm install
-   ```
+```bash
+npx policygen init
+```
 
-3. To run the Astro documentation site:
-   ```
-   cd packages/docs
-   npm run dev
-   ```
+The `init` wizard walks you through policy-related questions. Pass `--default` to emit a blank config file instead.
 
-4. To use the policygen CLI tool:
-   ```
-   cd packages/policygen
-   npm run start
-   ```
+The config file uses a [JSON schema](https://policygen.xyz/schemas/0.6/schema.json) for editor autocompletion:
 
-## Usage Guidelines
+```json
+{
+  "$schema": "https://policygen.xyz/schemas/0.6/schema.json",
+  "output": {
+    "fileType": "html",
+    "cssFramework": "classes",
+    "locales": ["en"],
+    "privacyFilePath": "./privacy.html",
+    "termsFilePath": "./terms.html"
+  },
+  "entity": { "name": "Acme Inc.", "website": "https://acme.com", "address": "..." },
+  "privacy": { "..." : "..." },
+  "terms": { "..." : "..." }
+}
+```
 
-- For documentation, navigate to the Astro site in your browser after running the development server.
-- For the policygen CLI tool, refer to the command line interface for available commands and options.
+### Generation
 
-This workspace is structured to facilitate easy development and maintenance of both the documentation site and the CLI tool.
+```bash
+# Generate all policies
+npx policygen generate
+
+# Generate only privacy policy
+npx policygen generate:privacy
+
+# Generate only terms of service
+npx policygen generate:terms
+```
+
+---
+
+## Features
+
+### Output Formats
+
+- **HTML** — standalone HTML pages with configurable CSS framework support (plain classes, Tailwind, DaisyUI)
+- **Astro** — `.astro` component files with optional layout wrapping and prop passing
+
+### Privacy Policy
+
+Covers a wide range of compliance requirements:
+
+- **Platform support** — web, mobile, desktop, and browser extensions
+- **Browser extension disclosures** — permissions, host permissions, data collected, local vs. remote processing
+- **Regulatory compliance** — GDPR, CCPA/CPRA, VCDPA, COPPA
+- **Cookie consent** — consent mechanisms with named provider support
+- **Cross-border transfers** — SCCs, BCRs, adequacy decisions
+- **Data breach notification** — configurable notification timeframes
+- **Data Protection Officer** — DPO contact details
+- **Third-party sharing and disclosure** — analytics, advertising, processors
+
+### Terms of Service
+
+- **Subscriptions & billing** — auto-renewal, free trials, refund policies (none/full/prorated)
+- **User content** — content licensing, DMCA takedown procedures
+- **Liability & disputes** — liability caps, arbitration vs. litigation, mediation, governing law
+- **Service SLA** — uptime targets, measurement timeframes, SLA refund types
+- **Force majeure** — protection against events beyond your control
+- **Tax liability** — jurisdiction-specific tax disclaimers
+- **Prohibited uses** — crawling, spam, impersonation, illegal activity, and more
+
+---
+
+## Documentation
+
+For full configuration reference and advanced usage, visit [policygen.xyz](https://policygen.xyz).
+
+## Sponsors
+
+PolicyGen is sponsored by [imothee.io](https://imothee.io).
+
+## License
+
+MIT

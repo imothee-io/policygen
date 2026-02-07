@@ -1,0 +1,90 @@
+---
+const installCmd = "npm install --save-dev policygen";
+---
+
+<section class="relative overflow-hidden px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
+  <!-- Background gradient orbs -->
+  <div
+    class="pointer-events-none absolute left-1/4 top-0 -z-10 h-96 w-96 -translate-x-1/2 rounded-full bg-purple/10 blur-3xl"
+  >
+  </div>
+  <div
+    class="pointer-events-none absolute right-1/4 bottom-0 -z-10 h-96 w-96 translate-x-1/2 rounded-full bg-teal/10 blur-3xl"
+  >
+  </div>
+
+  <div class="mx-auto max-w-4xl text-center">
+    <h1
+      class="bg-gradient-to-r from-purple-light via-purple to-teal bg-clip-text text-5xl leading-tight font-bold tracking-tight text-transparent sm:text-6xl lg:text-7xl"
+    >
+      Privacy policies.<br />Terms of service.<br />Generated from code.
+    </h1>
+
+    <p class="mx-auto mt-6 max-w-2xl text-lg text-text-muted sm:text-xl">
+      Define your policy config once in JSON, then generate well-structured HTML
+      or Astro pages automatically. GDPR, CCPA, COPPA — covered.
+    </p>
+
+    <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+      <a
+        href="/docs/getting-started"
+        class="inline-flex items-center rounded-lg bg-purple px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-purple-light"
+      >
+        Get Started
+        <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </a>
+      <a
+        href="/generator"
+        class="inline-flex items-center rounded-lg border border-border px-6 py-3 text-sm font-semibold text-text transition-colors hover:border-purple hover:text-purple-light"
+      >
+        Try the Generator
+      </a>
+    </div>
+
+    <!-- Install command -->
+    <div class="mt-12 flex justify-center">
+      <div
+        class="group relative inline-flex items-center gap-3 rounded-lg border border-border bg-bg-secondary px-5 py-3"
+      >
+        <span class="text-text-muted select-none">$</span>
+        <code class="font-mono text-sm text-teal-light">{installCmd}</code>
+        <button
+          id="copy-btn"
+          class="text-text-muted transition-colors hover:text-text"
+          aria-label="Copy install command"
+        >
+          <svg
+            class="h-4 w-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ installCmd }}>
+  document.getElementById("copy-btn")?.addEventListener("click", async () => {
+    await navigator.clipboard.writeText(installCmd);
+    const btn = document.getElementById("copy-btn");
+    if (btn) {
+      btn.innerHTML =
+        '<svg class="h-4 w-4 text-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>';
+      setTimeout(() => {
+        btn.innerHTML =
+          '<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>';
+      }, 2000);
+    }
+  });
+</script>

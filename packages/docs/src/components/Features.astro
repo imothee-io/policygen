@@ -1,0 +1,96 @@
+---
+const features = [
+  {
+    icon: "code",
+    title: "HTML & Astro Output",
+    description:
+      "Generate standalone HTML pages or Astro components with Tailwind, DaisyUI, or plain CSS class support.",
+  },
+  {
+    icon: "shield",
+    title: "Compliance Ready",
+    description:
+      "GDPR, CCPA/CPRA, VCDPA, COPPA — built-in regulatory compliance for privacy policies and terms of service.",
+  },
+  {
+    icon: "globe",
+    title: "Browser Extensions",
+    description:
+      "Dedicated privacy disclosures for browser extensions: permissions, data collection, and store listing URLs.",
+  },
+  {
+    icon: "settings",
+    title: "Config-Driven",
+    description:
+      "One JSON file controls everything. Schema-validated with editor autocompletion via JSON Schema.",
+  },
+  {
+    icon: "languages",
+    title: "Internationalization",
+    description:
+      "Multi-locale support out of the box. Generate policies in multiple languages from a single config.",
+  },
+  {
+    icon: "check",
+    title: "Schema Validated",
+    description:
+      "Full JSON Schema validation ensures your config is correct before generation. Catch errors early.",
+  },
+];
+
+const iconPaths: Record<string, string> = {
+  code: "M16 18l6-6-6-6M8 6l-6 6 6 6",
+  shield:
+    "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z",
+  globe:
+    "M12 2a10 10 0 100 20 10 10 0 000-20zM2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10A15.3 15.3 0 0112 2z",
+  settings:
+    "M12.22 2h-.44a2 2 0 00-2 2v.18a2 2 0 01-1 1.73l-.43.25a2 2 0 01-2 0l-.15-.08a2 2 0 00-2.73.73l-.22.38a2 2 0 00.73 2.73l.15.1a2 2 0 011 1.72v.51a2 2 0 01-1 1.74l-.15.09a2 2 0 00-.73 2.73l.22.38a2 2 0 002.73.73l.15-.08a2 2 0 012 0l.43.25a2 2 0 011 1.73V20a2 2 0 002 2h.44a2 2 0 002-2v-.18a2 2 0 011-1.73l.43-.25a2 2 0 012 0l.15.08a2 2 0 002.73-.73l.22-.39a2 2 0 00-.73-2.73l-.15-.08a2 2 0 01-1-1.74v-.5a2 2 0 011-1.74l.15-.09a2 2 0 00.73-2.73l-.22-.38a2 2 0 00-2.73-.73l-.15.08a2 2 0 01-2 0l-.43-.25a2 2 0 01-1-1.73V4a2 2 0 00-2-2zM12 15a3 3 0 100-6 3 3 0 000 6z",
+  languages:
+    "M5 8l6 10M4 14h12M10 2v6M5 2h14M7 2l4 8M17 2l-4 8",
+  check:
+    "M22 11.08V12a10 10 0 11-5.93-9.14M22 4L12 14.01l-3-3",
+};
+---
+
+<section class="px-4 py-20 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-7xl">
+    <div class="text-center">
+      <h2 class="text-3xl font-bold sm:text-4xl">
+        Everything you need for
+        <span class="bg-gradient-to-r from-purple to-teal bg-clip-text text-transparent">
+          policy generation
+        </span>
+      </h2>
+      <p class="mx-auto mt-4 max-w-2xl text-text-muted">
+        PolicyGen handles the complexity of legal compliance documents so you can focus on building your product.
+      </p>
+    </div>
+
+    <div class="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        features.map((feature) => (
+          <div class="group rounded-xl border border-border bg-bg-card p-6 transition-colors hover:border-purple/50">
+            <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-purple/10">
+              <svg
+                class="h-5 w-5 text-purple-light"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d={iconPaths[feature.icon]} />
+              </svg>
+            </div>
+            <h3 class="mb-2 text-lg font-semibold text-text">{feature.title}</h3>
+            <p class="text-sm leading-relaxed text-text-muted">
+              {feature.description}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

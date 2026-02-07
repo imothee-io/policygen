@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PolicyGenerator from "../components/PolicyGenerator.svelte";
+---
+
+<BaseLayout title="Policy Generator - PolicyGen" description="Interactive policy configuration generator. Build your policygen.json config visually.">
+  <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mb-10 text-center">
+      <h1 class="bg-gradient-to-r from-purple-light to-teal bg-clip-text text-4xl font-bold text-transparent">
+        Policy Generator
+      </h1>
+      <p class="mt-3 text-text-muted">
+        Configure your policy options and download the generated <code class="rounded bg-bg-card px-1.5 py-0.5 font-mono text-sm text-purple-light">policygen.json</code> file.
+      </p>
+    </div>
+    <PolicyGenerator client:load />
+  </div>
+</BaseLayout>
