@@ -1,6 +1,6 @@
+import fs from "node:fs";
+import path from "node:path";
 import Ajv from "ajv";
-import fs from "fs";
-import path from "path";
 import { defaultConfig, type PolicygenConfig } from "../config";
 
 // Get the current version from package.json
@@ -10,56 +10,52 @@ const [currentMajor, currentMinor] = currentVersion.split(".");
 const ajv = new Ajv();
 
 export function loadConfig(): PolicygenConfig {
-	const configPath = path.resolve(process.cwd(), "policygen.json");
+  const configPath = path.resolve(process.cwd(), "policygen.json");
 
-	if (!fs.existsSync(configPath)) {
-		console.warn("⚠️ Config file not found. Using defaults.");
-		return defaultConfig;
-	}
+  if (!fs.existsSync(configPath)) {
+    console.warn("⚠️ Config file not found. Using defaults.");
+    return defaultConfig;
+  }
 
-	const raw = fs.readFileSync(configPath, "utf-8");
-	const parsed = JSON.parse(raw) as Partial<PolicygenConfig>; // Allow $schema as an extra field
+  const raw = fs.readFileSync(configPath, "utf-8");
+  const parsed = JSON.parse(raw) as Partial<PolicygenConfig>; // Allow $schema as an extra field
 
-	// Get the schema version from the `$schema` field
-	const schemaUrl = parsed.$schema;
-	if (!schemaUrl) {
-		console.error("❌ Config file is missing the `$schema` field.");
-		process.exit(1);
-	}
+  // Get the schema version from the `$schema` field
+  const schemaUrl = parsed.$schema;
+  if (!schemaUrl) {
+    throw new Error("Config file is missing the `$schema` field.");
+  }
 
-	// Extract the schema version from the `$schema` URL
-	const schemaVersionMatch = schemaUrl.match(/schemas\/(\d+)\.(\d+)\//);
-	if (!schemaVersionMatch) {
-		console.error("❌ Invalid `$schema` field format.");
-		process.exit(1);
-	}
-	const [schemaMajor, schemaMinor] = schemaVersionMatch.slice(1, 3);
+  // Extract the schema version from the `$schema` URL
+  const schemaVersionMatch = schemaUrl.match(/schemas\/(\d+)\.(\d+)\//);
+  if (!schemaVersionMatch) {
+    throw new Error("Invalid `$schema` field format.");
+  }
+  const [schemaMajor, schemaMinor] = schemaVersionMatch.slice(1, 3);
 
-	// Check if the schema version matches the current version
-	if (schemaMajor !== currentMajor || schemaMinor !== currentMinor) {
-		console.warn(
-			`⚠️ Schema version (${schemaMajor}.${schemaMinor}) does not match the current version (${currentMajor}.${currentMinor}).`,
-		);
-	}
+  // Check if the schema version matches the current version
+  if (schemaMajor !== currentMajor || schemaMinor !== currentMinor) {
+    console.warn(
+      `⚠️ Schema version (${schemaMajor}.${schemaMinor}) does not match the current version (${currentMajor}.${currentMinor}).`,
+    );
+  }
 
-	// Use the schema from the dist folder
-	const schemaPath = path.resolve(__dirname, "../config_schema.json");
-	if (!fs.existsSync(schemaPath)) {
-		console.error(`❌ Schema file not found at ${schemaPath}`);
-		process.exit(1);
-	}
+  // Use the schema from the dist folder
+  const schemaPath = path.resolve(__dirname, "../config_schema.json");
+  if (!fs.existsSync(schemaPath)) {
+    throw new Error(`Schema file not found at ${schemaPath}`);
+  }
 
-	// Load and validate the schema
-	const configSchema = JSON.parse(fs.readFileSync(schemaPath, "utf-8"));
-	const validate = ajv.compile(configSchema);
-	if (!validate(parsed)) {
-		console.error("❌ Invalid config:", validate.errors);
-		process.exit(1);
-	}
+  // Load and validate the schema
+  const configSchema = JSON.parse(fs.readFileSync(schemaPath, "utf-8"));
+  const validate = ajv.compile(configSchema);
+  if (!validate(parsed)) {
+    throw new Error(`Invalid config: ${JSON.stringify(validate.errors)}`);
+  }
 
-	// Merge the validated config with the default config and return it
-	return {
-		...defaultConfig,
-		...parsed, // Spread works because parsed is typed as Partial<PolicygenConfig>
-	};
+  // Merge the validated config with the default config and return it
+  return {
+    ...defaultConfig,
+    ...parsed, // Spread works because parsed is typed as Partial<PolicygenConfig>
+  };
 }

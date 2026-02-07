@@ -1,9 +1,9 @@
 {
 	"name": "policygen",
-	"description": "A privacy and terms of service policygenerator for your website or app",
+	"description": "A privacy and terms of service policy generator for your website or app",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/imothee/policygen.git"
+		"url": "git+https://github.com/imotheexyz/policygen.git"
 	},
 	"keywords": [
 		"privacy",
@@ -12,20 +12,15 @@
 	"author": "imothee.xyz",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/imothee/policygen/issues"
+		"url": "https://github.com/imotheexyz/policygen/issues"
 	},
-	"homepage": "https://github.com/imothee/policygen#readme",
-	"workspaces": [
-		"packages/docs",
-		"packages/policygen"
-	],
+	"homepage": "https://github.com/imotheexyz/policygen#readme",
 	"scripts": {
-		"build:docs": "npm run build --workspace=packages/docs",
-		"build:policygen": "npm run build --workspace=packages/policygen",
-		"dev:docs": "npm run dev --workspace=packages/docs",
-		"test:policygen": "npm run test --workspace=packages/policygen"
-	},
-	"devDependencies": {
-		"@biomejs/biome": "^2.0.0-beta.2"
+		"build:docs": "pnpm --filter docs build",
+		"build:policygen": "pnpm --filter policygen build",
+		"dev:docs": "pnpm --filter docs dev",
+		"test:policygen": "pnpm --filter policygen test",
+		"lint": "biome check packages/",
+		"lint:fix": "biome check --write packages/"
 	}
 }

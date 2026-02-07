@@ -3,4 +3,315 @@ title: Configuration
 description: Defining the policygen config
 ---
 
-Coming soon.
+PolicyGen uses a `policygen.json` configuration file to customize your generated privacy policy and terms of service. This reference covers all available options.
+
+## Configuration Overview
+
+The configuration file has four main sections:
+
+```json
+{
+  "$schema": "https://policygen.xyz/schemas/0.6/schema.json",
+  "output": { /* Output configuration */ },
+  "entity": { /* Your organization details */ },
+  "privacy": { /* Privacy policy options */ },
+  "terms": { /* Terms of service options */ }
+}
+```
+
+## Output Configuration
+
+Controls how and where policies are generated.
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `privacyFilePath` | `string` | - | Output path for privacy policy. Use `{locale}` placeholder for multi-language |
+| `termsFilePath` | `string` | - | Output path for terms of service |
+| `fileType` | `"html"` \| `"astro"` | `"html"` | Output format |
+| `cssFramework` | `"tailwind"` \| `"daisyui"` \| `"classes"` | `"classes"` | CSS class style |
+| `locales` | `string[]` | `["en"]` | Languages to generate |
+
+### Example
+
+```json
+{
+  "output": {
+    "privacyFilePath": "./src/pages/privacy.html",
+    "termsFilePath": "./src/pages/terms.html",
+    "fileType": "html",
+    "cssFramework": "tailwind",
+    "locales": ["en"]
+  }
+}
+```
+
+## Entity Configuration
+
+Information about your organization.
+
+| Option | Type | Required | Description |
+|--------|------|----------|-------------|
+| `name` | `string` | Yes | Legal name of your organization |
+| `website` | `string` | Yes | Primary website URL |
+| `address` | `string` | No | Physical/mailing address |
+
+### Example
+
+```json
+{
+  "entity": {
+    "name": "Acme Corp",
+    "website": "https://acme.com",
+    "address": "123 Main St, San Francisco, CA 94102"
+  }
+}
+```
+
+## Privacy Configuration
+
+All options for customizing your privacy policy.
+
+### Contact & Basics
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `privacyEmail` | `string` | - | Contact email for privacy inquiries |
+| `platforms` | `string[]` | `["web"]` | Platforms: `web`, `mobile`, `desktop`, `browserExtension` |
+| `locations` | `string[]` | `[]` | Operating regions: `us`, `eu`, `uk`, `other` |
+| `privacyPage` | `string` | - | URL where users can manage privacy settings |
+
+### Data Collection
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `personalInformation` | `string[]` | `[]` | Personal data collected: `name`, `email`, `phone`, `address`, `password`, `ipAddress`, `deviceId`, `creditCard`, `locationData`, `anonymizedUsageData` |
+| `sensitiveInformation` | `string[]` | `[]` | Sensitive data: `ssn`, `financial`, `health`, `biometric`, `genetic`, `political`, `sexualOrientation`, `criminalHistory`, `religion` |
+| `socialSignIn` | `boolean` | `false` | Support social login (Google, Facebook, etc.) |
+| `paymentData` | `boolean` | `false` | Collect payment information |
+| `paymentProcessors` | `string[]` | `[]` | URLs to payment processor privacy policies |
+| `appUsageData` | `boolean` | `false` | Collect app usage/analytics data |
+
+### Third-Party Data
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `thirdPartyData` | `string[]` | `[]` | Data from third parties: `advertising`, `analytics`, `socialMedia`, `purchase`, `email`, `support`, `crm`, `job`, `address`, `behavior` |
+| `thirdPartyDisclosure` | `boolean` | `false` | Share data with service providers |
+| `thirdPartyDisclosureEntities` | `string[]` | `[]` | Categories of service providers |
+| `thirdPartySharing` | `boolean` | `false` | Sell/share data for marketing |
+| `thirdPartySharingEntities` | `string[]` | `[]` | Categories of marketing partners |
+
+### Tracking & Analytics
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `webTracking` | `boolean` | `false` | Use cookies and tracking technologies |
+| `thirdPartyAnalytics` | `boolean` | `false` | Use third-party analytics (Google Analytics, etc.) |
+
+### Security & Compliance
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `securityMeasures` | `boolean` | `false` | Implement security measures |
+| `serviceRequirements` | `string[]` | `[]` | Processing purposes: `accounts`, `communication`, `orders` |
+| `legalBasis` | `string[]` | `[]` | GDPR legal bases: `advertising`, `marketing`, `analytics`, `security`, `fraudPrevention` |
+| `dataRetentionPeriod` | `string` | - | How long data is retained (e.g., "1 year") |
+| `usStatePrivacyLaws` | `boolean` | `false` | Comply with US state laws (CCPA) |
+
+### Data Protection Officer
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `dpo` | `boolean` | `false` | Have a Data Protection Officer |
+| `dpoName` | `string` | - | DPO's name |
+| `dpoEmail` | `string` | - | DPO's contact email |
+| `dpoPhone` | `string` | - | DPO's phone number |
+
+### Browser Extension (v0.5+)
+
+For browser extension privacy policies.
+
+| Option | Type | Description |
+|--------|------|-------------|
+| `browserExtension.name` | `string` | Extension name |
+| `browserExtension.permissions` | `string[]` | Browser permissions requested |
+| `browserExtension.hostPermissions` | `string[]` | Host permissions (URLs) |
+| `browserExtension.dataCollected` | `string[]` | Data types collected |
+| `browserExtension.dataSentTo` | `string` | Where data is sent |
+| `browserExtension.runsLocally` | `boolean` | Processes data locally |
+| `browserExtension.storeListingUrl` | `string` | Store listing URL |
+
+### New in v0.6
+
+#### CPRA Compliance
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `cpraCompliance` | `boolean` | `false` | California Privacy Rights Act compliance. Adds rights to correct data, limit sensitive data use, and opt-out of automated decision-making |
+
+#### VCDPA Compliance
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `vcdpaCompliance` | `boolean` | `false` | Virginia Consumer Data Protection Act compliance. Required for businesses processing data of 100,000+ VA consumers |
+
+#### Cookie Consent
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `cookieConsent` | `boolean` | `false` | Implement cookie consent mechanisms |
+| `cookieConsentProvider` | `string` | - | Cookie consent provider name (e.g., "OneTrust", "CookieYes") |
+
+#### Data Breach Notification
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `dataBreachNotification` | `boolean` | `false` | Have breach notification procedures |
+| `dataBreachTimeframe` | `string` | - | Notification timeframe (e.g., "72 hours" for GDPR) |
+
+#### Cross-Border Data Transfers
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `crossBorderTransfers` | `boolean` | `false` | Transfer data internationally |
+| `transferMechanisms` | `string[]` | - | Legal mechanisms: `scc` (Standard Contractual Clauses), `bcr` (Binding Corporate Rules), `adequacy` (Adequacy Decision) |
+
+#### COPPA Compliance
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `coppaCompliance` | `boolean` | `false` | Children's Online Privacy Protection Act compliance |
+| `childrenMinAge` | `number` | `13` | Minimum age for users |
+
+## Terms Configuration
+
+All options for customizing your terms of service.
+
+### Basic Settings
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `supportEmail` | `string` | - | Contact email for support |
+| `underEighteen` | `boolean` | `false` | Allow users under 18 |
+| `underThirteen` | `boolean` | `false` | Allow users under 13 (COPPA implications) |
+| `userAccounts` | `boolean` | `false` | Require user accounts |
+
+### Payments & Subscriptions
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `purchasableGoods` | `boolean` | `false` | Sell one-time purchases |
+| `subscription` | `boolean` | `false` | Offer subscriptions |
+| `freeTrial` | `boolean` | `false` | Offer free trials |
+| `autoRenew` | `boolean` | `false` | Auto-renew subscriptions |
+| `refundPolicy` | `"none"` \| `"full"` \| `"prorata"` | `"none"` | Refund policy |
+
+### User Content
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `userContent` | `boolean` | `false` | Allow user-generated content |
+| `userContentLicense` | `boolean` | `false` | Claim license to user content |
+
+### Legal
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `governingLaw` | `string` | `"California"` | Governing jurisdiction |
+| `disputeResolution` | `"arbitration"` \| `"litigation"` | `"litigation"` | Dispute resolution method |
+| `mediation` | `boolean` | `false` | Require mediation first |
+| `prohibitedUses` | `string[]` | `[]` | Prohibited uses: `crawling`, `illegal`, `harmful`, `infringing`, `abusive`, `spam`, `advertising`, `impersonation`, `accountTransfer` |
+
+### Service Level Agreement
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `serviceSLA` | `boolean` | `false` | Offer SLA |
+| `serviceSLAAmount` | `number` | `0` | Uptime percentage (e.g., 99.9) |
+| `serviceSLATimeframe` | `string` | - | Measurement period |
+| `serviceSLARefund` | `boolean` | `false` | SLA refunds |
+| `serviceSLARefundType` | `"full"` \| `"prorata"` | - | Refund type |
+| `serviceSLACustom` | `string` | - | Custom SLA text |
+
+### Liability
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `liabilityLimitation` | `boolean` | `false` | Limit liability |
+| `liabilityLimitationType` | `string` | - | `amount_paid`, `amount`, or `minAmountPaidOrAmount` |
+| `liabilityLimitationTimeframe` | `string` | - | Timeframe for calculation |
+| `liabilityLimitationAmount` | `number` | `0` | Fixed cap amount |
+
+### New in v0.6
+
+#### Force Majeure
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `forceMajeure` | `boolean` | `true` | Include force majeure clause. Protects against liability for events beyond your control (natural disasters, wars, pandemics, etc.) |
+
+#### DMCA Takedown
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `dmcaTakedown` | `boolean` | `false` | Include DMCA takedown procedure. Required for US safe harbor protection when hosting user content |
+| `dmcaEmail` | `string` | - | Email for DMCA notices |
+
+#### Tax Liability
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `taxLiability` | `boolean` | `false` | Include tax disclaimer. Clarifies users are responsible for applicable taxes |
+| `taxJurisdiction` | `string` | - | Primary tax jurisdiction |
+
+## Migration Guide: v0.5 → v0.6
+
+### Breaking Changes
+
+None. v0.6 is backward compatible with v0.5 configurations.
+
+### New Features
+
+1. **Update your schema URL**:
+   ```json
+   "$schema": "https://policygen.xyz/schemas/0.6/schema.json"
+   ```
+
+2. **Add new privacy features** (optional):
+   ```json
+   {
+     "privacy": {
+       "cpraCompliance": true,
+       "vcdpaCompliance": true,
+       "cookieConsent": true,
+       "cookieConsentProvider": "OneTrust",
+       "dataBreachNotification": true,
+       "dataBreachTimeframe": "72 hours",
+       "crossBorderTransfers": true,
+       "transferMechanisms": ["scc", "adequacy"],
+       "coppaCompliance": true,
+       "childrenMinAge": 13
+     }
+   }
+   ```
+
+3. **Add new terms features** (optional):
+   ```json
+   {
+     "terms": {
+       "forceMajeure": true,
+       "dmcaTakedown": true,
+       "dmcaEmail": "dmca@example.com",
+       "taxLiability": true,
+       "taxJurisdiction": "United States"
+     }
+   }
+   ```
+
+### Regenerate Policies
+
+After updating your configuration:
+
+```bash
+npx policygen generate
+```

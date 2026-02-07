@@ -1,7 +1,7 @@
+import fs from "node:fs";
+import path from "node:path";
 import ejs from "ejs";
-import fs from "fs";
 import i18next, { type TFunction } from "i18next";
-import path from "path";
 import type { FileType, Locale, PolicygenConfig } from "../config";
 import en from "../locales/en";
 
@@ -12,34 +12,34 @@ import en from "../locales/en";
  * @param outputPath - Path to write the rendered output.
  */
 export async function renderTemplate(
-	config: PolicygenConfig,
-	policyType: "privacy" | "terms",
+  config: PolicygenConfig,
+  policyType: "privacy" | "terms",
 ): Promise<void> {
-	try {
-		// Read the template file
-		const templatePath = getTemplatePath(config.output.fileType, policyType);
-		const template = fs.readFileSync(templatePath, "utf-8");
+  try {
+    // Read the template file
+    const templatePath = getTemplatePath(config.output.fileType, policyType);
+    const template = fs.readFileSync(templatePath, "utf-8");
 
-		// Initialize i18next
-		const t = await getI18n();
+    // Initialize i18next
+    const t = await getI18n();
 
-		// Get the CSS styles based on the framework
-		const css = getCssStyles(config.output.cssFramework);
+    // Get the CSS styles based on the framework
+    const css = getCssStyles(config.output.cssFramework);
 
-		// For each locale, render the template
-		const locales = config.output.locales;
-		for (const locale of locales) {
-			// Set the current language for i18next
-			i18next.changeLanguage(locale);
+    // For each locale, render the template
+    const locales = config.output.locales;
+    for (const locale of locales) {
+      // Set the current language for i18next
+      i18next.changeLanguage(locale);
 
-			const outputPath = getOutputPath(config, locale, policyType);
-			await renderTemplateToFile(template, outputPath, css, t, config);
-			console.log(`✅ Successfully rendered template to ${outputPath}`);
-		}
-	} catch (error) {
-		console.error(`❌ Failed to render template: ${error}`);
-		throw error;
-	}
+      const outputPath = getOutputPath(config, locale, policyType);
+      await renderTemplateToFile(template, outputPath, css, t, config);
+      console.log(`✅ Successfully rendered template to ${outputPath}`);
+    }
+  } catch (error) {
+    console.error(`❌ Failed to render template: ${error}`);
+    throw error;
+  }
 }
 
 /**
@@ -47,52 +47,58 @@ export async function renderTemplate(
  * @param cssFramework - The framework to use (e.g., "tailwind, daisy, classes").
  */
 export function getCssStyles(cssFramework: string): Record<string, string> {
-	switch (cssFramework) {
-		case "tailwind":
-			return {
-				container: "container mx-auto px-4 py-8",
-				section: "mb-8",
-				heading: "text-2xl font-bold mb-4",
-				subheading: "text-xl font-semibold mb-2",
-				tertiary: "text-lg font-semibold mb-2",
-				paragraph: "text-base mb-4",
-				bold: "font-bold",
-				list: "list-disc pl-5 mb-4",
-				listItem: "mb-2",
-				link: "text-blue-500 hover:underline",
-				footer: "text-sm text-gray-500 mt-8",
-			};
-		case "daisyui":
-			return {
-				container: "container mx-auto px-4 py-8",
-				section: "mb-8",
-				heading: "text-primary text-2xl font-bold mb-4",
-				subheading: "text-secondary text-xl font-semibold mb-2",
-				tertiary: "text-accent text-lg font-semibold mb-2",
-				paragraph: "text-base mb-4",
-				bold: "font-bold",
-				list: "list-disc pl-5 mb-4",
-				listItem: "mb-2",
-				link: "text-primary hover:underline",
-				footer: "text-sm text-gray-500 mt-8",
-			};
-		case "classes":
-			return {
-				container: "container",
-				section: "section",
-				heading: "heading",
-				subheading: "subheading",
-				tertiary: "tertiary",
-				paragraph: "paragraph",
-				bold: "bold",
-				list: "list",
-				listItem: "list-item",
-				link: "link",
-				footer: "footer",
-			};
-		default:
-			throw new Error(`Unknown framework: ${cssFramework}`);
-	}
+  switch (cssFramework) {
+    case "tailwind":
+      return {
+        container: "container mx-auto px-4 py-8",
+        section: "mb-8",
+        heading: "text-2xl font-bold mb-4",
+        subheading: "text-xl font-semibold mb-2",
+        tertiary: "text-lg font-semibold mb-2",
+        paragraph: "text-base mb-4",
+        bold: "font-bold",
+        list: "list-disc pl-5 mb-4",
+        ol_class: "list-decimal pl-5 mb-4",
+        ul_class: "list-disc pl-5 mb-4",
+        listItem: "mb-2",
+        link: "text-blue-500 hover:underline",
+        footer: "text-sm text-gray-500 mt-8",
+      };
+    case "daisyui":
+      return {
+        container: "container mx-auto px-4 py-8",
+        section: "mb-8",
+        heading: "text-primary text-2xl font-bold mb-4",
+        subheading: "text-secondary text-xl font-semibold mb-2",
+        tertiary: "text-accent text-lg font-semibold mb-2",
+        paragraph: "text-base mb-4",
+        bold: "font-bold",
+        list: "list-disc pl-5 mb-4",
+        ol_class: "list-decimal pl-5 mb-4",
+        ul_class: "list-disc pl-5 mb-4",
+        listItem: "mb-2",
+        link: "text-primary hover:underline",
+        footer: "text-sm text-gray-500 mt-8",
+      };
+    case "classes":
+      return {
+        container: "container",
+        section: "section",
+        heading: "heading",
+        subheading: "subheading",
+        tertiary: "tertiary",
+        paragraph: "paragraph",
+        bold: "bold",
+        list: "list",
+        ol_class: "ordered-list",
+        ul_class: "unordered-list",
+        listItem: "list-item",
+        link: "link",
+        footer: "footer",
+      };
+    default:
+      throw new Error(`Unknown framework: ${cssFramework}`);
+  }
 }
 
 /**
@@ -101,15 +107,15 @@ export function getCssStyles(cssFramework: string): Record<string, string> {
  * @throws Error if i18next is not initialized
  */
 async function getI18n() {
-	return await i18next.init({
-		fallbackLng: "en",
-		interpolation: {
-			escapeValue: false, // Disable escaping for all translations
-		},
-		resources: {
-			en,
-		},
-	});
+  return await i18next.init({
+    fallbackLng: "en",
+    interpolation: {
+      escapeValue: true, // Enable escaping to prevent XSS - templates use <%- for intentional HTML
+    },
+    resources: {
+      en,
+    },
+  });
 }
 
 /**
@@ -120,23 +126,24 @@ async function getI18n() {
  * @returns The output path for the generated policy file.
  */
 function getOutputPath(
-	config: PolicygenConfig,
-	locale: Locale,
-	policyType: "privacy" | "terms",
+  config: PolicygenConfig,
+  locale: Locale,
+  policyType: "privacy" | "terms",
 ): string {
-	const outputPath = config.output[`${policyType}FilePath`]!;
+  // biome-ignore lint/style/noNonNullAssertion: File path is guaranteed to exist when this function is called
+  const outputPath = config.output[`${policyType}FilePath`]!;
 
-	if (config.output.locales.length > 1) {
-		if (!outputPath.includes("{locale}")) {
-			throw new Error(
-				`Output path for ${policyType} must include {locale} placeholder when multiple locales are specified.`,
-			);
-		} else {
-			return outputPath.replace("{locale}", locale);
-		}
-	}
+  if (config.output.locales.length > 1) {
+    if (!outputPath.includes("{locale}")) {
+      throw new Error(
+        `Output path for ${policyType} must include {locale} placeholder when multiple locales are specified.`,
+      );
+    } else {
+      return outputPath.replace("{locale}", locale);
+    }
+  }
 
-	return outputPath;
+  return outputPath;
 }
 
 /**
@@ -146,12 +153,12 @@ function getOutputPath(
  * @returns The path to the EJS template file.
  */
 function getTemplatePath(
-	fileType: FileType,
-	policyType: "privacy" | "terms",
+  fileType: FileType,
+  policyType: "privacy" | "terms",
 ): string {
-	const templateDir = path.join(__dirname, "../../templates");
-	const templateFile = `${policyType}.${fileType}.ejs`;
-	return path.join(templateDir, templateFile);
+  const templateDir = path.join(__dirname, "../../templates");
+  const templateFile = `${policyType}.${fileType}.ejs`;
+  return path.join(templateDir, templateFile);
 }
 
 /**
@@ -162,29 +169,29 @@ function getTemplatePath(
  * @throws Error if the output path is not specified
  */
 async function renderTemplateToFile(
-	template: string,
-	outputPath: string,
-	css: Record<string, string>,
-	t: TFunction,
-	config: PolicygenConfig,
+  template: string,
+  outputPath: string,
+  css: Record<string, string>,
+  t: TFunction,
+  config: PolicygenConfig,
 ): Promise<void> {
-	const formatDate = (date: Date) => {
-		return new Intl.DateTimeFormat("en-US", {
-			day: "numeric",
-			month: "long",
-			year: "numeric",
-		}).format(date);
-	};
+  const formatDate = (date: Date) => {
+    return new Intl.DateTimeFormat("en-US", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }).format(date);
+  };
 
-	const rendered = await ejs.render(template, {
-		css,
-		t,
-		config,
-		updated: formatDate(new Date()),
-	});
+  const rendered = await ejs.render(template, {
+    css,
+    t,
+    config,
+    updated: formatDate(new Date()),
+  });
 
-	// Ensure the output directory exists
-	fs.mkdirSync(path.dirname(outputPath), { recursive: true });
-	// Write the rendered output to the specified file
-	fs.writeFileSync(outputPath, rendered, "utf-8");
+  // Ensure the output directory exists
+  fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+  // Write the rendered output to the specified file
+  fs.writeFileSync(outputPath, rendered, "utf-8");
 }

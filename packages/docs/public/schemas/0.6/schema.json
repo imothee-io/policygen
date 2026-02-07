@@ -31,6 +31,25 @@
             "const": "en"
           },
           "title": "locales"
+        },
+        "astroLayout": {
+          "description": "Astro layout configuration (only used when fileType is \"astro\").\nIf not provided, generates a standalone HTML page.",
+          "type": "object",
+          "properties": {
+            "path": {
+              "description": "Path to the Layout component (e.g., \"~/layouts/Layout.astro\")",
+              "type": "string",
+              "title": "path"
+            },
+            "props": {
+              "$ref": "#/definitions/AstroLayoutProps",
+              "description": "Props to pass to the Layout component",
+              "title": "props"
+            }
+          },
+          "additionalProperties": false,
+          "required": ["path"],
+          "title": "astroLayout"
         }
       },
       "additionalProperties": false,
@@ -58,13 +77,16 @@
       "title": "entity"
     },
     "privacy": {
+      "description": "Privacy policy configuration.",
       "type": "object",
       "properties": {
         "privacyEmail": {
+          "description": "Contact email for privacy-related questions and requests",
           "type": "string",
           "title": "privacyEmail"
         },
         "platforms": {
+          "description": "Platforms where your service operates (web, mobile, desktop, browserExtension)",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Platforms"
@@ -72,6 +94,7 @@
           "title": "platforms"
         },
         "locations": {
+          "description": "Geographic regions where you operate (affects which laws apply)",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Locations"
@@ -79,10 +102,12 @@
           "title": "locations"
         },
         "socialSignIn": {
+          "description": "Whether you offer social sign-in (Google, Facebook, etc.)",
           "type": "boolean",
           "title": "socialSignIn"
         },
         "personalInformation": {
+          "description": "Types of personal information you collect",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PersonalInformation"
@@ -90,6 +115,7 @@
           "title": "personalInformation"
         },
         "sensitiveInformation": {
+          "description": "Types of sensitive information you collect (health, biometric, etc.)",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SensitiveInformation"
@@ -97,6 +123,7 @@
           "title": "sensitiveInformation"
         },
         "thirdPartyData": {
+          "description": "Types of data received from third parties",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ThirdPartyData"
@@ -104,10 +131,12 @@
           "title": "thirdPartyData"
         },
         "paymentData": {
+          "description": "Whether you collect payment/billing information",
           "type": "boolean",
           "title": "paymentData"
         },
         "paymentProcessors": {
+          "description": "URLs to payment processor privacy policies (e.g., Stripe, PayPal)",
           "type": "array",
           "items": {
             "type": "string"
@@ -115,14 +144,17 @@
           "title": "paymentProcessors"
         },
         "appUsageData": {
+          "description": "Whether you collect app usage data and logs",
           "type": "boolean",
           "title": "appUsageData"
         },
         "thirdPartyDisclosure": {
+          "description": "Whether you share data with third-party service providers",
           "type": "boolean",
           "title": "thirdPartyDisclosure"
         },
         "thirdPartyDisclosureEntities": {
+          "description": "Categories of third parties you disclose data to",
           "type": "array",
           "items": {
             "type": "string"
@@ -130,10 +162,12 @@
           "title": "thirdPartyDisclosureEntities"
         },
         "thirdPartySharing": {
+          "description": "Whether you sell or share data for advertising/marketing",
           "type": "boolean",
           "title": "thirdPartySharing"
         },
         "thirdPartySharingEntities": {
+          "description": "Categories of third parties you share/sell data to",
           "type": "array",
           "items": {
             "type": "string"
@@ -141,18 +175,22 @@
           "title": "thirdPartySharingEntities"
         },
         "securityMeasures": {
+          "description": "Whether you implement security measures (encryption, access controls)",
           "type": "boolean",
           "title": "securityMeasures"
         },
         "webTracking": {
+          "description": "Whether you use cookies and web tracking technologies",
           "type": "boolean",
           "title": "webTracking"
         },
         "thirdPartyAnalytics": {
+          "description": "Whether you use third-party analytics (Google Analytics, etc.)",
           "type": "boolean",
           "title": "thirdPartyAnalytics"
         },
         "serviceRequirements": {
+          "description": "Purposes for which you process data",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ServiceRequirements"
@@ -160,6 +198,7 @@
           "title": "serviceRequirements"
         },
         "legalBasis": {
+          "description": "Legal bases for data processing under GDPR",
           "type": "array",
           "items": {
             "$ref": "#/definitions/LegalBasis"
@@ -167,34 +206,42 @@
           "title": "legalBasis"
         },
         "dataRetentionPeriod": {
+          "description": "How long you retain user data (e.g., \"1 year\", \"until account deletion\")",
           "type": "string",
           "title": "dataRetentionPeriod"
         },
         "usStatePrivacyLaws": {
+          "description": "Whether you comply with US state privacy laws (CCPA, etc.)",
           "type": "boolean",
           "title": "usStatePrivacyLaws"
         },
         "privacyPage": {
+          "description": "URL where users can manage their privacy settings",
           "type": "string",
           "title": "privacyPage"
         },
         "dpo": {
+          "description": "Whether you have a Data Protection Officer",
           "type": "boolean",
           "title": "dpo"
         },
         "dpoName": {
+          "description": "Name of your Data Protection Officer",
           "type": "string",
           "title": "dpoName"
         },
         "dpoEmail": {
+          "description": "Contact email for your DPO",
           "type": "string",
           "title": "dpoEmail"
         },
         "dpoPhone": {
+          "description": "Contact phone for your DPO",
           "type": "string",
           "title": "dpoPhone"
         },
         "browserExtension": {
+          "description": "Configuration for browser extension privacy disclosures",
           "type": "object",
           "properties": {
             "name": {
@@ -244,6 +291,65 @@
             "runsLocally"
           ],
           "title": "browserExtension"
+        },
+        "cpraCompliance": {
+          "description": "CPRA (California Privacy Rights Act) compliance.\nAdds California-specific rights: right to correct data, limit sensitive data use,\nand opt-out of automated decision-making. Required if you have CA users and\nmeet CPRA thresholds.",
+          "default": false,
+          "type": "boolean",
+          "title": "cpraCompliance"
+        },
+        "vcdpaCompliance": {
+          "description": "VCDPA (Virginia Consumer Data Protection Act) compliance.\nAdds Virginia-specific consumer rights disclosures. Required if you process\ndata of 100,000+ VA consumers or derive 50%+ revenue from selling VA consumer data.",
+          "default": false,
+          "type": "boolean",
+          "title": "vcdpaCompliance"
+        },
+        "cookieConsent": {
+          "description": "Whether you implement cookie consent mechanisms.\nAdds a cookie policy section explaining consent, preferences, and management.",
+          "default": false,
+          "type": "boolean",
+          "title": "cookieConsent"
+        },
+        "cookieConsentProvider": {
+          "description": "Name of your cookie consent provider (e.g., \"OneTrust\", \"CookieYes\", \"Termly\").\nDisplayed in the cookie consent section.",
+          "type": "string",
+          "title": "cookieConsentProvider"
+        },
+        "dataBreachNotification": {
+          "description": "Whether you have data breach notification procedures.\nAdds section explaining how users will be notified in case of a breach.",
+          "default": false,
+          "type": "boolean",
+          "title": "dataBreachNotification"
+        },
+        "dataBreachTimeframe": {
+          "description": "Timeframe for breach notification (e.g., \"72 hours\").\nGDPR requires notification within 72 hours.",
+          "type": "string",
+          "title": "dataBreachTimeframe"
+        },
+        "crossBorderTransfers": {
+          "description": "Whether you transfer data across international borders.\nAdds section explaining transfer safeguards (SCCs, BCRs, adequacy decisions).",
+          "default": false,
+          "type": "boolean",
+          "title": "crossBorderTransfers"
+        },
+        "transferMechanisms": {
+          "description": "Legal mechanisms used for cross-border data transfers.\n- scc: Standard Contractual Clauses\n- bcr: Binding Corporate Rules\n- adequacy: Adequacy decisions (e.g., EU-US Data Privacy Framework)",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TransferMechanism"
+          },
+          "title": "transferMechanisms"
+        },
+        "coppaCompliance": {
+          "description": "COPPA (Children's Online Privacy Protection Act) compliance.\nRequired if you knowingly collect data from children under 13 in the US.\nAdds parental consent requirements and children's privacy disclosures.",
+          "default": false,
+          "type": "boolean",
+          "title": "coppaCompliance"
+        },
+        "childrenMinAge": {
+          "description": "Minimum age for users (typically 13 for COPPA, 16 for some EU countries).\nUsed in COPPA compliance section.",
+          "type": "number",
+          "title": "childrenMinAge"
         }
       },
       "additionalProperties": false,
@@ -273,61 +379,76 @@
       "title": "privacy"
     },
     "terms": {
+      "description": "Terms of service configuration.",
       "type": "object",
       "properties": {
         "underEighteen": {
+          "description": "Whether users under 18 can use your service",
           "type": "boolean",
           "title": "underEighteen"
         },
         "underThirteen": {
+          "description": "Whether users under 13 can use your service (COPPA implications)",
           "type": "boolean",
           "title": "underThirteen"
         },
         "purchasableGoods": {
+          "description": "Whether you sell one-time purchasable goods/products",
           "type": "boolean",
           "title": "purchasableGoods"
         },
         "subscription": {
+          "description": "Whether you offer subscription-based services",
           "type": "boolean",
           "title": "subscription"
         },
         "freeTrial": {
+          "description": "Whether you offer free trial periods",
           "type": "boolean",
           "title": "freeTrial"
         },
         "autoRenew": {
+          "description": "Whether subscriptions auto-renew",
           "type": "boolean",
           "title": "autoRenew"
         },
         "refundPolicy": {
           "$ref": "#/definitions/RefundPolicy",
+          "description": "Your refund policy (none, full, prorata)",
           "title": "refundPolicy"
         },
         "userContent": {
+          "description": "Whether users can submit/upload content",
           "type": "boolean",
           "title": "userContent"
         },
         "userContentLicense": {
+          "description": "Whether you claim a license to user-generated content",
           "type": "boolean",
           "title": "userContentLicense"
         },
         "userAccounts": {
+          "description": "Whether user accounts are required",
           "type": "boolean",
           "title": "userAccounts"
         },
         "governingLaw": {
+          "description": "Jurisdiction for governing law (e.g., \"California\", \"Delaware\")",
           "type": "string",
           "title": "governingLaw"
         },
         "disputeResolution": {
           "$ref": "#/definitions/DisputeResolution",
+          "description": "How disputes are resolved (arbitration or litigation)",
           "title": "disputeResolution"
         },
         "mediation": {
+          "description": "Whether mediation is required before formal disputes",
           "type": "boolean",
           "title": "mediation"
         },
         "prohibitedUses": {
+          "description": "List of prohibited uses of your service",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ProhibitedUses"
@@ -335,48 +456,87 @@
           "title": "prohibitedUses"
         },
         "serviceSLA": {
+          "description": "Whether you offer a Service Level Agreement",
           "type": "boolean",
           "title": "serviceSLA"
         },
         "serviceSLAAmount": {
+          "description": "SLA uptime percentage (e.g., 99.9)",
           "type": "number",
           "title": "serviceSLAAmount"
         },
         "serviceSLATimeframe": {
+          "description": "SLA measurement timeframe (e.g., \"30 days\", \"monthly\")",
           "type": "string",
           "title": "serviceSLATimeframe"
         },
         "serviceSLARefund": {
+          "description": "Whether SLA violations result in refunds/credits",
           "type": "boolean",
           "title": "serviceSLARefund"
         },
         "serviceSLARefundType": {
           "$ref": "#/definitions/RefundType",
+          "description": "Type of SLA refund (full or prorated)",
           "title": "serviceSLARefundType"
         },
         "serviceSLACustom": {
+          "description": "Custom SLA terms (overrides default SLA text)",
           "type": "string",
           "title": "serviceSLACustom"
         },
         "liabilityLimitation": {
+          "description": "Whether you limit liability",
           "type": "boolean",
           "title": "liabilityLimitation"
         },
         "liabilityLimitationType": {
           "$ref": "#/definitions/LiabilityLimitationType",
+          "description": "How liability is calculated",
           "title": "liabilityLimitationType"
         },
         "liabilityLimitationTimeframe": {
+          "description": "Timeframe for liability calculation (e.g., \"6 months\")",
           "type": "string",
           "title": "liabilityLimitationTimeframe"
         },
         "liabilityLimitationAmount": {
+          "description": "Fixed dollar amount for liability cap",
           "type": "number",
           "title": "liabilityLimitationAmount"
         },
         "supportEmail": {
+          "description": "Contact email for support questions",
           "type": "string",
           "title": "supportEmail"
+        },
+        "forceMajeure": {
+          "description": "Force majeure clause.\nProtects against liability for failures due to events beyond your control\n(natural disasters, wars, pandemics, government actions, etc.).\nRecommended for most services.",
+          "default": true,
+          "type": "boolean",
+          "title": "forceMajeure"
+        },
+        "dmcaTakedown": {
+          "description": "DMCA takedown procedure.\nRequired if you host user-generated content in the US and want safe harbor\nprotection under 17 U.S.C. § 512. Adds section explaining how copyright\nholders can submit takedown notices.",
+          "default": false,
+          "type": "boolean",
+          "title": "dmcaTakedown"
+        },
+        "dmcaEmail": {
+          "description": "Designated email for DMCA takedown notices.\nShould be monitored and responded to promptly.",
+          "type": "string",
+          "title": "dmcaEmail"
+        },
+        "taxLiability": {
+          "description": "Tax liability disclaimer.\nClarifies that users are responsible for applicable taxes on purchases.\nImportant for international services.",
+          "default": false,
+          "type": "boolean",
+          "title": "taxLiability"
+        },
+        "taxJurisdiction": {
+          "description": "Tax jurisdiction (e.g., \"United States\", \"European Union\").\nUsed in tax liability section.",
+          "type": "string",
+          "title": "taxJurisdiction"
         }
       },
       "additionalProperties": false,
@@ -417,6 +577,12 @@
       "title": "CSSFramework",
       "type": "string",
       "enum": ["tailwind", "daisyui", "classes"]
+    },
+    "AstroLayoutProps": {
+      "description": "Props to pass to the Astro Layout component.\nAllows any string/number/boolean/object values.",
+      "additionalProperties": true,
+      "title": "AstroLayoutProps",
+      "type": "object"
     },
     "Platforms": {
       "title": "Platforms",
@@ -527,6 +693,12 @@
         "localStorage",
         "credentials"
       ]
+    },
+    "TransferMechanism": {
+      "description": "Cross-border data transfer mechanisms for GDPR compliance.\n- scc: Standard Contractual Clauses - EU-approved contract terms for data transfers\n- bcr: Binding Corporate Rules - internal rules for multinational companies\n- adequacy: Adequacy Decision - transfers to countries deemed adequate by EU Commission",
+      "title": "TransferMechanism",
+      "type": "string",
+      "enum": ["scc", "bcr", "adequacy"]
     },
     "RefundPolicy": {
       "title": "RefundPolicy",
