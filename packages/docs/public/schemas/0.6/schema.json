@@ -48,12 +48,18 @@
             }
           },
           "additionalProperties": false,
-          "required": ["path"],
+          "required": [
+            "path"
+          ],
           "title": "astroLayout"
         }
       },
       "additionalProperties": false,
-      "required": ["cssFramework", "fileType", "locales"],
+      "required": [
+        "cssFramework",
+        "fileType",
+        "locales"
+      ],
       "title": "output"
     },
     "entity": {
@@ -73,7 +79,11 @@
         }
       },
       "additionalProperties": false,
-      "required": ["address", "name", "website"],
+      "required": [
+        "address",
+        "name",
+        "website"
+      ],
       "title": "entity"
     },
     "privacy": {
@@ -566,17 +576,27 @@
     }
   },
   "additionalProperties": false,
-  "required": ["entity", "output"],
+  "required": [
+    "entity",
+    "output"
+  ],
   "definitions": {
     "FileType": {
       "title": "FileType",
       "type": "string",
-      "enum": ["html", "astro"]
+      "enum": [
+        "html",
+        "astro"
+      ]
     },
     "CSSFramework": {
       "title": "CSSFramework",
       "type": "string",
-      "enum": ["tailwind", "daisyui", "classes"]
+      "enum": [
+        "tailwind",
+        "daisyui",
+        "classes"
+      ]
     },
     "AstroLayoutProps": {
       "description": "Props to pass to the Astro Layout component.\nAllows any string/number/boolean/object values.",
@@ -587,12 +607,22 @@
     "Platforms": {
       "title": "Platforms",
       "type": "string",
-      "enum": ["web", "mobile", "desktop", "browserExtension"]
+      "enum": [
+        "web",
+        "mobile",
+        "desktop",
+        "browserExtension"
+      ]
     },
     "Locations": {
       "title": "Locations",
       "type": "string",
-      "enum": ["us", "eu", "uk", "other"]
+      "enum": [
+        "us",
+        "eu",
+        "uk",
+        "other"
+      ]
     },
     "PersonalInformation": {
       "title": "PersonalInformation",
@@ -644,7 +674,11 @@
     "ServiceRequirements": {
       "title": "ServiceRequirements",
       "type": "string",
-      "enum": ["accounts", "communication", "orders"]
+      "enum": [
+        "accounts",
+        "communication",
+        "orders"
+      ]
     },
     "LegalBasis": {
       "title": "LegalBasis",
@@ -698,17 +732,28 @@
       "description": "Cross-border data transfer mechanisms for GDPR compliance.\n- scc: Standard Contractual Clauses - EU-approved contract terms for data transfers\n- bcr: Binding Corporate Rules - internal rules for multinational companies\n- adequacy: Adequacy Decision - transfers to countries deemed adequate by EU Commission",
       "title": "TransferMechanism",
       "type": "string",
-      "enum": ["scc", "bcr", "adequacy"]
+      "enum": [
+        "scc",
+        "bcr",
+        "adequacy"
+      ]
     },
     "RefundPolicy": {
       "title": "RefundPolicy",
       "type": "string",
-      "enum": ["none", "full", "prorata"]
+      "enum": [
+        "none",
+        "full",
+        "prorata"
+      ]
     },
     "DisputeResolution": {
       "title": "DisputeResolution",
       "type": "string",
-      "enum": ["arbitration", "litigation"]
+      "enum": [
+        "arbitration",
+        "litigation"
+      ]
     },
     "ProhibitedUses": {
       "title": "ProhibitedUses",
@@ -728,12 +773,19 @@
     "RefundType": {
       "title": "RefundType",
       "type": "string",
-      "enum": ["full", "prorata"]
+      "enum": [
+        "full",
+        "prorata"
+      ]
     },
     "LiabilityLimitationType": {
       "title": "LiabilityLimitationType",
       "type": "string",
-      "enum": ["amount_paid", "amount", "minAmountPaidOrAmount"]
+      "enum": [
+        "amount_paid",
+        "amount",
+        "minAmountPaidOrAmount"
+      ]
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
@@ -748,12 +800,16 @@
                 "type": "string"
               }
             },
-            "required": ["privacyFilePath"]
+            "required": [
+              "privacyFilePath"
+            ]
           }
         }
       },
       "then": {
-        "required": ["privacy"]
+        "required": [
+          "privacy"
+        ]
       }
     },
     {
@@ -766,12 +822,16 @@
                 "type": "string"
               }
             },
-            "required": ["termsFilePath"]
+            "required": [
+              "termsFilePath"
+            ]
           }
         }
       },
       "then": {
-        "required": ["terms"]
+        "required": [
+          "terms"
+        ]
       }
     }
   ]

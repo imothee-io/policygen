@@ -1,10 +1,37 @@
 {
   "name": "policygen",
   "version": "0.6.0",
-  "description": "A CLI tool to generate policies",
+  "description": "Generate privacy and terms of service policies for your website or app",
+  "keywords": [
+    "privacy",
+    "privacy-policy",
+    "terms-of-service",
+    "policy-generator",
+    "gdpr",
+    "ccpa",
+    "coppa",
+    "legal"
+  ],
+  "author": "imothee.xyz",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imothee-io/policygen.git",
+    "directory": "packages/policygen"
+  },
+  "homepage": "https://policygen.xyz",
+  "bugs": {
+    "url": "https://github.com/imothee-io/policygen/issues"
+  },
   "bin": {
     "policygen": "./dist/index.js"
   },
+  "files": [
+    "dist",
+    "templates",
+    "LICENSE",
+    "README.md"
+  ],
   "scripts": {
     "build": "npm run build:schema && tsc",
     "build:schema": "ts-node scripts/generateSchema.ts",

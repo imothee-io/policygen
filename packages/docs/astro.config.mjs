@@ -12,7 +12,7 @@ export default defineConfig({
         {
           icon: "github",
           label: "GitHub",
-          href: "https://github.com/imothee/policygen",
+          href: "https://github.com/imothee-io/policygen",
         },
       ],
       sidebar: [

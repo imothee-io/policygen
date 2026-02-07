@@ -1,8 +1,8 @@
 # PolicyGen
 
-PolicyGen is a tool to codify your privacy and terms of service policies and auto-generate great-looking pages for your website or app.
+Generate privacy and terms of service policies for your website or app. Define your policy config once in JSON, then generate well-structured HTML or Astro pages automatically.
 
-[Get Started with PolicyGen](https://policygen.xyz)
+[Documentation](https://policygen.xyz) | [GitHub](https://github.com/imothee-io/policygen)
 
 ---
 
@@ -10,53 +10,99 @@ PolicyGen is a tool to codify your privacy and terms of service policies and aut
 
 ### Installation
 
-You can use PolicyGen by installing a local copy into your node modules or using `npx`.
-
 ```bash
 npm install --save-dev policygen
 ```
 
----
-
-### Configuration
-
-You will need to create a `policygen.json` configuration file for each project. This file specifies the policies that your company implements.
-
-To create the `policygen.json` file, run the `init` command in the root folder of your project:
+Or use directly with `npx`:
 
 ```bash
 npx policygen init
 ```
 
-The `init` function will walk you through answering a series of policy-related questions in a wizard format. If you want to skip the wizard, you can pass the `--default` flag to emit a blank default `policygen.json` file instead.
+### Configuration
 
----
+Create a `policygen.json` config file in your project root:
+
+```bash
+npx policygen init
+```
+
+The `init` wizard walks you through policy-related questions. Pass `--default` to emit a blank config file instead.
+
+The config file uses a [JSON schema](https://policygen.xyz/schemas/0.6/schema.json) for editor autocompletion:
+
+```json
+{
+  "$schema": "https://policygen.xyz/schemas/0.6/schema.json",
+  "output": {
+    "fileType": "html",
+    "cssFramework": "classes",
+    "locales": ["en"],
+    "privacyFilePath": "./privacy.html",
+    "termsFilePath": "./terms.html"
+  },
+  "entity": { "name": "Acme Inc.", "website": "https://acme.com", "address": "..." },
+  "privacy": { ... },
+  "terms": { ... }
+}
+```
 
 ### Generation
 
-Once your `policygen.json` file is set up, you can generate your policy files.
+```bash
+# Generate all policies
+npx policygen generate
 
-The `generate` command takes flags to specify which policies you want to generate. By default, it generates all policies (`:all`).
+# Generate only privacy policy
+npx policygen generate:privacy
 
-#### Examples:
+# Generate only terms of service
+npx policygen generate:terms
+```
 
-- **Generate All Policies**:
-  ```bash
-  npx policygen generate
-  ```
+---
 
-- **Generate Privacy Policy**:
-  ```bash
-  npx policygen generate:privacy
-  ```
+## Features
 
-- **Generate Terms of Service**:
-  ```bash
-  npx policygen generate:terms
-  ```
+### Output Formats
+
+- **HTML** — standalone HTML pages with configurable CSS framework support (plain classes, Tailwind, DaisyUI)
+- **Astro** — `.astro` component files with optional layout wrapping and prop passing
+
+### Privacy Policy
+
+Covers a wide range of compliance requirements:
+
+- **Platform support** — web, mobile, desktop, and browser extensions
+- **Browser extension disclosures** — permissions, host permissions, data collected, local vs. remote processing
+- **Regulatory compliance** — GDPR, CCPA/CPRA, VCDPA, COPPA
+- **Cookie consent** — consent mechanisms with named provider support
+- **Cross-border transfers** — SCCs, BCRs, adequacy decisions
+- **Data breach notification** — configurable notification timeframes
+- **Data Protection Officer** — DPO contact details
+- **Third-party sharing and disclosure** — analytics, advertising, processors
+
+### Terms of Service
+
+- **Subscriptions & billing** — auto-renewal, free trials, refund policies (none/full/prorated)
+- **User content** — content licensing, DMCA takedown procedures
+- **Liability & disputes** — liability caps, arbitration vs. litigation, mediation, governing law
+- **Service SLA** — uptime targets, measurement timeframes, SLA refund types
+- **Force majeure** — protection against events beyond your control
+- **Tax liability** — jurisdiction-specific tax disclaimers
+- **Prohibited uses** — crawling, spam, impersonation, illegal activity, and more
 
 ---
 
 ## Documentation
 
-For more details and advanced usage, visit the [PolicyGen Homepage](https://policygen.xyz).
+For full configuration reference and advanced usage, visit [policygen.xyz](https://policygen.xyz).
+
+## Sponsors
+
+PolicyGen is sponsored by [imothee.io](https://imothee.io).
+
+## License
+
+MIT
