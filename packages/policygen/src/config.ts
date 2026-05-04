@@ -91,6 +91,43 @@ export type BrowserExtensionConfig = {
   storeListingUrl?: string;
 };
 
+/**
+ * AI / LLM provider used by the product. Values are stable identifiers
+ * resolved against translation strings to render provider name + URL +
+ * description. Add new providers here as they're adopted.
+ */
+export enum AiProvider {
+  anthropic = "anthropic",
+  awsBedrock = "awsBedrock",
+  openai = "openai",
+  azureOpenAi = "azureOpenAi",
+  googleAi = "googleAi",
+  vertexAi = "vertexAi",
+  cohere = "cohere",
+  mistral = "mistral",
+  ollama = "ollama",
+}
+
+/**
+ * AI usage disclosure block. Surfaces in privacy as a dedicated section
+ * naming the providers data flows to, what AI is used for, whether user
+ * data trains models, whether credentials/secrets are excluded from LLM
+ * inputs, and whether AI makes consequential automated decisions about
+ * users (relevant for GDPR Art 22, CPRA, Colorado AI Act, EU AI Act).
+ */
+export type AiUsageConfig = {
+  /** AI providers user data may flow to */
+  providers: AiProvider[];
+  /** Free-text bullets for what AI is used for (e.g. "summarizing user inputs") */
+  usedFor: string[];
+  /** Whether you train any models on user data (almost always false) */
+  noTraining: boolean;
+  /** Whether secrets/credentials are excluded from LLM inputs */
+  credentialsExcluded: boolean;
+  /** Whether AI makes consequential automated decisions about users */
+  automatedDecisionMaking: boolean;
+};
+
 export enum ProhibitedUses {
   crawling = "crawling",
   illegal = "illegal",
@@ -230,6 +267,13 @@ export type PrivacyConfig = {
   dpoPhone?: string;
   /** Configuration for browser extension privacy disclosures */
   browserExtension?: BrowserExtensionConfig;
+  /**
+   * AI usage disclosure. When set, renders a dedicated AI section listing
+   * providers user data may flow to, what AI is used for, no-training
+   * commitment, credential exclusion, and automated-decision disclosure.
+   * Required for any product that sends user data to LLMs / AI APIs.
+   */
+  aiUsage?: AiUsageConfig;
 
   // v0.6 features (all optional for backward compatibility)
 
@@ -418,6 +462,19 @@ export type AstroLayoutConfig = {
   props?: AstroLayoutProps;
 };
 
+/**
+ * Inner shell wrapper rendered between the Astro Layout and the policy
+ * content. Use this when the Layout is just an HTML wrapper and your
+ * marketing nav/footer live in a separate shell component (common in
+ * suite-style apps).
+ */
+export type AstroShellConfig = {
+  /** Path to the shell component (e.g., "~/components/MarketingShell.astro") */
+  path: string;
+  /** Props to pass to the shell component */
+  props?: AstroLayoutProps;
+};
+
 export type OutputConfig = {
   // Individual file paths for privacy and terms
   privacyFilePath?: string;
@@ -437,6 +494,13 @@ export type OutputConfig = {
    * If not provided, generates a standalone HTML page.
    */
   astroLayout?: AstroLayoutConfig;
+
+  /**
+   * Optional inner shell wrapper rendered inside the Astro Layout.
+   * Useful when the marketing chrome (nav/footer) lives in a separate
+   * component from the page Layout.
+   */
+  astroShell?: AstroShellConfig;
 };
 
 export type PolicygenConfig = {
