@@ -518,7 +518,7 @@ export const defaultTermsConfig: TermsConfig = {
   serviceSLACustom: undefined,
   liabilityLimitation: false,
   liabilityLimitationType: undefined,
-  liabilityLimitationTimeframe: undefined,
+  liabilityLimitationTimeframe: "twelve (12) months",
   liabilityLimitationAmount: 0,
   // v0.6 features
   forceMajeure: true,
